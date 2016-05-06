@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Un4seen.Bass;
 
-namespace BassPlayer
+namespace MusicLibrary
 {
     public static class BassMethods
     {

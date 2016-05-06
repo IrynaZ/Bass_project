@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BassPlayer.Properties
+namespace MusicLibrary.Properties
 {
 
 

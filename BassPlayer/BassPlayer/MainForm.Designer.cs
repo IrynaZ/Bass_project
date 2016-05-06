@@ -1,6 +1,6 @@
-﻿namespace BassPlayer
+﻿namespace MusicLibrary
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,16 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Songs", 0, 1);
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Artists", 0, 1);
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Albums", 0, 1);
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Genres", 0, 1);
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Music", new System.Windows.Forms.TreeNode[] {
+            treeNode1,
+            treeNode2,
+            treeNode3,
+            treeNode4});
             this.PlayList = new System.Windows.Forms.ListBox();
             this.Eject_btn = new System.Windows.Forms.Button();
             this.Stop_btn = new System.Windows.Forms.Button();
@@ -41,9 +50,9 @@
             this.Vol_sl = new MB.Controls.ColorSlider();
             this.Time_sl = new MB.Controls.ColorSlider();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.libraryTreeView = new System.Windows.Forms.TreeView();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.treeView1 = new System.Windows.Forms.TreeView();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.musicFilesListView = new System.Windows.Forms.ListView();
             this.columnName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnArtist = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnAlbum = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -163,48 +172,71 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.treeView1);
+            this.splitContainer1.Panel1.Controls.Add(this.libraryTreeView);
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.listView1);
+            this.splitContainer1.Panel2.Controls.Add(this.musicFilesListView);
             this.splitContainer1.Size = new System.Drawing.Size(832, 236);
             this.splitContainer1.SplitterDistance = 277;
             this.splitContainer1.TabIndex = 9;
+            // 
+            // libraryTreeView
+            // 
+            this.libraryTreeView.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.libraryTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.libraryTreeView.Font = new System.Drawing.Font("Tahoma", 13.74545F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.libraryTreeView.ImageIndex = 0;
+            this.libraryTreeView.ImageList = this.imageList1;
+            this.libraryTreeView.Location = new System.Drawing.Point(0, 0);
+            this.libraryTreeView.Name = "libraryTreeView";
+            treeNode1.ImageIndex = 0;
+            treeNode1.Name = "Songs";
+            treeNode1.SelectedImageIndex = 1;
+            treeNode1.Text = "Songs";
+            treeNode2.ImageIndex = 0;
+            treeNode2.Name = "Artists";
+            treeNode2.SelectedImageIndex = 1;
+            treeNode2.Text = "Artists";
+            treeNode3.ImageIndex = 0;
+            treeNode3.Name = "Albums";
+            treeNode3.SelectedImageIndex = 1;
+            treeNode3.Text = "Albums";
+            treeNode4.ImageIndex = 0;
+            treeNode4.Name = "Genres";
+            treeNode4.SelectedImageIndex = 1;
+            treeNode4.Text = "Genres";
+            treeNode5.Name = "Music";
+            treeNode5.Text = "Music";
+            this.libraryTreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode5});
+            this.libraryTreeView.SelectedImageIndex = 0;
+            this.libraryTreeView.Size = new System.Drawing.Size(277, 236);
+            this.libraryTreeView.TabIndex = 0;
             // 
             // imageList1
             // 
             this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "folder_green_open_4511.png");
-            this.imageList1.Images.SetKeyName(1, "knotify_5158.png");
+            this.imageList1.Images.SetKeyName(0, "folder_cyan_open_6776.ico");
+            this.imageList1.Images.SetKeyName(1, "folder_sound_4752.ico");
             // 
-            // treeView1
+            // musicFilesListView
             // 
-            this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeView1.ImageIndex = 0;
-            this.treeView1.ImageList = this.imageList1;
-            this.treeView1.Location = new System.Drawing.Point(0, 0);
-            this.treeView1.Name = "treeView1";
-            this.treeView1.SelectedImageIndex = 0;
-            this.treeView1.Size = new System.Drawing.Size(277, 236);
-            this.treeView1.TabIndex = 0;
-            // 
-            // listView1
-            // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.musicFilesListView.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.musicFilesListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnName,
             this.columnArtist,
             this.columnAlbum,
             this.columnGenre});
-            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView1.Location = new System.Drawing.Point(0, 0);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(551, 236);
-            this.listView1.SmallImageList = this.imageList1;
-            this.listView1.TabIndex = 0;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
+            this.musicFilesListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.musicFilesListView.Location = new System.Drawing.Point(0, 0);
+            this.musicFilesListView.Name = "musicFilesListView";
+            this.musicFilesListView.Size = new System.Drawing.Size(551, 236);
+            this.musicFilesListView.SmallImageList = this.imageList1;
+            this.musicFilesListView.TabIndex = 0;
+            this.musicFilesListView.UseCompatibleStateImageBehavior = false;
+            this.musicFilesListView.View = System.Windows.Forms.View.Details;
             // 
             // columnName
             // 
@@ -222,7 +254,7 @@
             // 
             this.columnGenre.Text = "Genre";
             // 
-            // Form1
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -241,10 +273,10 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimizeBox = false;
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Music Library";
-            this.TransparencyKey = System.Drawing.SystemColors.ControlLightLight;
+            this.TransparencyKey = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.Load += new System.EventHandler(this.Form1_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
@@ -268,9 +300,9 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.TreeView treeView1;
+        private System.Windows.Forms.TreeView libraryTreeView;
         private System.Windows.Forms.ImageList imageList1;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView musicFilesListView;
         private System.Windows.Forms.ColumnHeader columnName;
         private System.Windows.Forms.ColumnHeader columnArtist;
         private System.Windows.Forms.ColumnHeader columnAlbum;

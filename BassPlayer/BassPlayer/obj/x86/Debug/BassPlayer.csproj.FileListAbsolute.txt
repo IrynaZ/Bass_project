@@ -11,3 +11,16 @@ I:\C#\Music_Library\BassPlayer\BassPlayer\obj\x86\Debug\BassPlayer.Properties.Re
 I:\C#\Music_Library\BassPlayer\BassPlayer\obj\x86\Debug\BassPlayer.csproj.GenerateResource.Cache
 I:\C#\Music_Library\BassPlayer\BassPlayer\obj\x86\Debug\BassPlayer.exe
 I:\C#\Music_Library\BassPlayer\BassPlayer\obj\x86\Debug\BassPlayer.pdb
+C:\Learning\MusicLibrary\BassPlayer\BassPlayer\bin\x86\Debug\BassPlayer.exe.config
+C:\Learning\MusicLibrary\BassPlayer\BassPlayer\obj\x86\Debug\BassPlayer.exe
+C:\Learning\MusicLibrary\BassPlayer\BassPlayer\obj\x86\Debug\BassPlayer.pdb
+C:\Learning\MusicLibrary\BassPlayer\BassPlayer\bin\x86\Debug\BassPlayer.exe
+C:\Learning\MusicLibrary\BassPlayer\BassPlayer\bin\x86\Debug\BassPlayer.pdb
+C:\Learning\MusicLibrary\BassPlayer\BassPlayer\bin\x86\Debug\Bass.Net.dll
+C:\Learning\MusicLibrary\BassPlayer\BassPlayer\bin\x86\Debug\ColorSlider.dll
+C:\Learning\MusicLibrary\BassPlayer\BassPlayer\bin\x86\Debug\ColorSlider.pdb
+C:\Learning\MusicLibrary\BassPlayer\BassPlayer\bin\x86\Debug\Bass.Net.xml
+C:\Learning\MusicLibrary\BassPlayer\BassPlayer\obj\x86\Debug\BassPlayer.csprojResolveAssemblyReference.cache
+C:\Learning\MusicLibrary\BassPlayer\BassPlayer\obj\x86\Debug\BassPlayer.Properties.Resources.resources
+C:\Learning\MusicLibrary\BassPlayer\BassPlayer\obj\x86\Debug\BassPlayer.csproj.GenerateResource.Cache
+C:\Learning\MusicLibrary\BassPlayer\BassPlayer\obj\x86\Debug\MusicLibrary.MainForm.resources

@@ -7,24 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
-namespace BassPlayer
+namespace MusicLibrary
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-           
-        }
-
-        private void colorSlider2_Scroll(object sender, ScrollEventArgs e)
-        {
-            
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -57,8 +48,6 @@ namespace BassPlayer
             }
         }
 
-
-
         private void timer1_Tick(object sender, EventArgs e)
         {
             label2.Text = TimeSpan.FromSeconds(BassMethods.GetPosOfStream(BassMethods.Stream)).ToString();
@@ -81,6 +70,21 @@ namespace BassPlayer
             timer1.Enabled = false;
             Time_sl.Value = 0;
             label2.Text = "00:00:00";
+        }
+
+        protected void libraryTreeView_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            switch (e.Node.Text)
+            {
+                case "Songs":
+                    break;
+                case "Artists":
+                    break;
+                case "Albums":
+                    break;
+                case "Genres":
+                    break;
+            }
         }
     }
 }
