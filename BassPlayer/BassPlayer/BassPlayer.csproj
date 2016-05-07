@@ -42,7 +42,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Bass.Net">
-      <HintPath>..\..\..\music project\Bass24.Net\v4.5\Bass.Net.dll</HintPath>
+      <HintPath>..\..\Bass24.Net\v4.5\Bass.Net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -103,13 +103,13 @@
     <None Include="Resources\arrow-down_6345.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\music project\ColorSlider\ColorSlider\ColorSlider.csproj">
-      <Project>{16E224DC-7FF0-4908-8318-D6A3AC2E797A}</Project>
-      <Name>ColorSlider</Name>
-    </ProjectReference>
+    <Content Include="bass.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bass.dll" />
+    <ProjectReference Include="..\..\ColorSlider\ColorSlider\ColorSlider.csproj">
+      <Project>{16e224dc-7ff0-4908-8318-d6a3ac2e797a}</Project>
+      <Name>ColorSlider</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

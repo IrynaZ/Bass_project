@@ -1,0 +1,12 @@
+I:\C#\music project\ColorSlider\ColorSlider\bin\x86\Debug\ColorSlider.dll
+I:\C#\music project\ColorSlider\ColorSlider\bin\x86\Debug\ColorSlider.pdb
+I:\C#\music project\ColorSlider\ColorSlider\obj\x86\Debug\MB.Controls.ColorSlider.resources
+I:\C#\music project\ColorSlider\ColorSlider\obj\x86\Debug\ColorSlider.csproj.GenerateResource.Cache
+I:\C#\music project\ColorSlider\ColorSlider\obj\x86\Debug\ColorSlider.dll
+I:\C#\music project\ColorSlider\ColorSlider\obj\x86\Debug\ColorSlider.pdb
+I:\C#\Music_Library\ColorSlider\ColorSlider\bin\x86\Debug\ColorSlider.dll
+I:\C#\Music_Library\ColorSlider\ColorSlider\bin\x86\Debug\ColorSlider.pdb
+I:\C#\Music_Library\ColorSlider\ColorSlider\obj\x86\Debug\MB.Controls.ColorSlider.resources
+I:\C#\Music_Library\ColorSlider\ColorSlider\obj\x86\Debug\ColorSlider.csproj.GenerateResource.Cache
+I:\C#\Music_Library\ColorSlider\ColorSlider\obj\x86\Debug\ColorSlider.dll
+I:\C#\Music_Library\ColorSlider\ColorSlider\obj\x86\Debug\ColorSlider.pdb
