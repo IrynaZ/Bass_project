@@ -1,0 +1,13 @@
+I:\C#\Music_Library\BassPlayer\BassPlayer\bin\x86\Debug\BassPlayer.exe.config
+I:\C#\Music_Library\BassPlayer\BassPlayer\bin\x86\Debug\BassPlayer.exe
+I:\C#\Music_Library\BassPlayer\BassPlayer\bin\x86\Debug\BassPlayer.pdb
+I:\C#\Music_Library\BassPlayer\BassPlayer\bin\x86\Debug\Bass.Net.dll
+I:\C#\Music_Library\BassPlayer\BassPlayer\bin\x86\Debug\ColorSlider.dll
+I:\C#\Music_Library\BassPlayer\BassPlayer\bin\x86\Debug\ColorSlider.pdb
+I:\C#\Music_Library\BassPlayer\BassPlayer\bin\x86\Debug\Bass.Net.xml
+I:\C#\Music_Library\BassPlayer\BassPlayer\obj\x86\Debug\BassPlayer.csprojResolveAssemblyReference.cache
+I:\C#\Music_Library\BassPlayer\BassPlayer\obj\x86\Debug\BassPlayer.Form1.resources
+I:\C#\Music_Library\BassPlayer\BassPlayer\obj\x86\Debug\BassPlayer.Properties.Resources.resources
+I:\C#\Music_Library\BassPlayer\BassPlayer\obj\x86\Debug\BassPlayer.csproj.GenerateResource.Cache
+I:\C#\Music_Library\BassPlayer\BassPlayer\obj\x86\Debug\BassPlayer.exe
+I:\C#\Music_Library\BassPlayer\BassPlayer\obj\x86\Debug\BassPlayer.pdb
