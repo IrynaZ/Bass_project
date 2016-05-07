@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CS\BassMethods.cs" />
+    <Compile Include="CS\FileHandling.cs" />
     <Compile Include="CS\Vars.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>

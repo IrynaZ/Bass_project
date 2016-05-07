@@ -39,7 +39,6 @@
             treeNode2,
             treeNode3,
             treeNode4});
-            this.PlayList = new System.Windows.Forms.ListBox();
             this.Eject_btn = new System.Windows.Forms.Button();
             this.Stop_btn = new System.Windows.Forms.Button();
             this.Play_btn = new System.Windows.Forms.Button();
@@ -57,20 +56,12 @@
             this.columnArtist = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnAlbum = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnGenre = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.labelFilePlaying = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // PlayList
-            // 
-            this.PlayList.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.PlayList.FormattingEnabled = true;
-            this.PlayList.Location = new System.Drawing.Point(12, 340);
-            this.PlayList.Name = "PlayList";
-            this.PlayList.Size = new System.Drawing.Size(390, 30);
-            this.PlayList.TabIndex = 0;
             // 
             // Eject_btn
             // 
@@ -236,11 +227,12 @@
             this.musicFilesListView.SmallImageList = this.imageList1;
             this.musicFilesListView.TabIndex = 0;
             this.musicFilesListView.UseCompatibleStateImageBehavior = false;
-            this.musicFilesListView.View = System.Windows.Forms.View.Details;
+            this.musicFilesListView.View = System.Windows.Forms.View.List;
             // 
             // columnName
             // 
             this.columnName.Text = "Name";
+            this.columnName.Width = 400;
             // 
             // columnArtist
             // 
@@ -254,6 +246,15 @@
             // 
             this.columnGenre.Text = "Genre";
             // 
+            // labelFilePlaying
+            // 
+            this.labelFilePlaying.AutoSize = true;
+            this.labelFilePlaying.Location = new System.Drawing.Point(12, 340);
+            this.labelFilePlaying.Name = "labelFilePlaying";
+            this.labelFilePlaying.Size = new System.Drawing.Size(79, 13);
+            this.labelFilePlaying.TabIndex = 10;
+            this.labelFilePlaying.Text = "labelFilePlaying";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -261,6 +262,7 @@
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(856, 392);
+            this.Controls.Add(this.labelFilePlaying);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -269,7 +271,6 @@
             this.Controls.Add(this.Eject_btn);
             this.Controls.Add(this.Stop_btn);
             this.Controls.Add(this.Play_btn);
-            this.Controls.Add(this.PlayList);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimizeBox = false;
@@ -277,7 +278,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Music Library";
             this.TransparencyKey = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.FormClosing += MainForm_FormClosing;
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -288,8 +289,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.ListBox PlayList;
         private System.Windows.Forms.Button Play_btn;
         private System.Windows.Forms.Button Stop_btn;
         private System.Windows.Forms.Button Eject_btn;
@@ -307,6 +306,7 @@
         private System.Windows.Forms.ColumnHeader columnArtist;
         private System.Windows.Forms.ColumnHeader columnAlbum;
         private System.Windows.Forms.ColumnHeader columnGenre;
+        private System.Windows.Forms.Label labelFilePlaying;
     }
 }
 
