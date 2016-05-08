@@ -14,22 +14,23 @@ namespace MusicLibrary
 {
     public partial class MainForm : Form
     {
-        FileHandling LibraryContent = new FileHandling("LibraryContent.txt");
-
         public MainForm()
         {
             InitializeComponent();
-            Vars.Files = LibraryContent.inputContent;
-            foreach (string file in Vars.Files)
+            libraryTreeView.ExpandAll();
+            if (!FileHandling.MissingFileCreation("LibraryContent.txt"))
             {
-                musicFilesListView.Items.Add(Vars.GetFileName(file));
+                FileHandling.ReadFromFile("LibraryContent.txt", out Vars.Files);
+                foreach (string file in Vars.Files)
+                {
+                    musicFilesListView.Items.Add(Vars.GetFileName(file));
+                }
             }
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            LibraryContent.outputContent = Vars.Files;
-            LibraryContent.WriteOutputToFile("LibraryContent.txt");
+            FileHandling.WriteToFile(Vars.Files,"LibraryContent.txt");
         }
 
         private void Eject_btn_Click(object sender, EventArgs e)
@@ -97,9 +98,9 @@ namespace MusicLibrary
             }
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
+        private void addFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            openFileDialog1.ShowDialog();
         }
     }
 }

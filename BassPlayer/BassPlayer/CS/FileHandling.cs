@@ -4,19 +4,21 @@ using System.IO;
 
 namespace BassPlayer.CS
 {
-    public class FileHandling
+    public static class FileHandling
     {
-        public List<string> inputContent { get; set; }
-        public List<string> outputContent { get; set; }
-
-        public FileHandling(string inputFilePath)
+        public static bool MissingFileCreation(string filePath)
         {
-            inputContent = outputContent = ReadFromFile(inputFilePath);
+            if (!File.Exists(filePath))
+            {
+                File.Create(filePath);
+                return true;
+            }
+            return false;
         }
 
-        public List<string> ReadFromFile(string filePath)
+        public static void ReadFromFile(string filePath, out List<string> fileContent)
         {
-            List<string> fileContent = new List<string>();
+            fileContent = new List<string>();
             using (StreamReader fileReader = new StreamReader(filePath))
             {
                 string fileLine = null;
@@ -25,14 +27,13 @@ namespace BassPlayer.CS
                     fileContent.Add(fileLine);
                 }
             }
-            return fileContent;
         }
 
-        public void WriteOutputToFile(string filePath)
+        public static void WriteToFile(List<string> fileContent, string filePath)
         {
             using (StreamWriter fileWriter = new StreamWriter(filePath))
             {
-                foreach (string fileLine in outputContent)
+                foreach (string fileLine in fileContent)
                 {
                     fileWriter.WriteLine(fileLine);
                 }
