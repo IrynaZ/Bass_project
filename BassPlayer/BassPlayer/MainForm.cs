@@ -30,7 +30,7 @@ namespace MusicLibrary
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            FileHandling.WriteToFile(Vars.Files,"LibraryContent.txt");
+            FileHandling.WriteToFile(Vars.Files, "LibraryContent.txt");
         }
 
         private void Eject_btn_Click(object sender, EventArgs e)
@@ -40,13 +40,17 @@ namespace MusicLibrary
 
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
-            Vars.Files.Add(openFileDialog1.FileName);
-            musicFilesListView.Items.Add(Vars.GetFileName(openFileDialog1.FileName));
+            string file = openFileDialog1.FileName;
+            if (!Vars.FileAlreadyExistsInFiles(file) && Vars.FileIsMP3(file))
+            {
+                Vars.Files.Add(file);
+                musicFilesListView.Items.Add(Vars.GetFileName(file));
+            }
         }
 
         private void Play_btn_Click(object sender, EventArgs e)
         {
-            if ((musicFilesListView.Items.Count !=0) && (musicFilesListView.SelectedIndices != null))
+            if ((musicFilesListView.Items.Count != 0) && (musicFilesListView.SelectedIndices != null))
             {
                 string current = Vars.Files[musicFilesListView.SelectedIndices[0]];
                 labelFilePlaying.Text = Vars.GetFileName(current);
@@ -101,6 +105,41 @@ namespace MusicLibrary
         private void addFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             openFileDialog1.ShowDialog();
+        }
+
+        private void addFolderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string folderPath;
+            if (openFolderDialog1.ShowDialog() == DialogResult.OK)
+            {
+                folderPath = openFolderDialog1.SelectedPath;
+                foreach (string file in Directory.GetFiles(folderPath))
+                {
+                    if (!Vars.FileAlreadyExistsInFiles(file) && Vars.FileIsMP3(file))
+                    {
+                        Vars.Files.Add(file);
+                        musicFilesListView.Items.Add(Vars.GetFileName(file));
+                    }
+                }
+            }
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if ((musicFilesListView.Items.Count != 0) && (musicFilesListView.SelectedIndices != null))
+            {
+                ListView.SelectedIndexCollection indexes = musicFilesListView.SelectedIndices;
+                foreach (int index in indexes)
+                {
+                    musicFilesListView.Items[index].Remove();
+                    Vars.Files.Remove(musicFilesListView.Items[index].Text);
+                }
+            }
         }
     }
 }

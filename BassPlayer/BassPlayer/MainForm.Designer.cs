@@ -39,7 +39,6 @@
             treeNode2,
             treeNode3,
             treeNode4});
-            this.Eject_btn = new System.Windows.Forms.Button();
             this.Stop_btn = new System.Windows.Forms.Button();
             this.Play_btn = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -71,6 +70,7 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openFolderDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -78,19 +78,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
-            this.FormClosing += MainForm_FormClosing;
-            // 
-            // Eject_btn
-            // 
-            this.Eject_btn.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.Eject_btn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Eject_btn.BackgroundImage")));
-            this.Eject_btn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.Eject_btn.Location = new System.Drawing.Point(12, 35);
-            this.Eject_btn.Name = "Eject_btn";
-            this.Eject_btn.Size = new System.Drawing.Size(51, 52);
-            this.Eject_btn.TabIndex = 3;
-            this.Eject_btn.UseVisualStyleBackColor = false;
-            this.Eject_btn.Click += new System.EventHandler(this.Eject_btn_Click);
             // 
             // Stop_btn
             // 
@@ -98,7 +85,7 @@
             this.Stop_btn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Stop_btn.BackgroundImage")));
             this.Stop_btn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Stop_btn.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.Stop_btn.Location = new System.Drawing.Point(174, 35);
+            this.Stop_btn.Location = new System.Drawing.Point(123, 35);
             this.Stop_btn.Name = "Stop_btn";
             this.Stop_btn.Size = new System.Drawing.Size(51, 52);
             this.Stop_btn.TabIndex = 1;
@@ -110,7 +97,7 @@
             this.Play_btn.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.Play_btn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Play_btn.BackgroundImage")));
             this.Play_btn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.Play_btn.Location = new System.Drawing.Point(121, 35);
+            this.Play_btn.Location = new System.Drawing.Point(70, 35);
             this.Play_btn.Name = "Play_btn";
             this.Play_btn.Size = new System.Drawing.Size(49, 52);
             this.Play_btn.TabIndex = 1;
@@ -329,7 +316,7 @@
             this.buttonNextMusicFile.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.buttonNextMusicFile.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("buttonNextMusicFile.BackgroundImage")));
             this.buttonNextMusicFile.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.buttonNextMusicFile.Location = new System.Drawing.Point(230, 35);
+            this.buttonNextMusicFile.Location = new System.Drawing.Point(179, 35);
             this.buttonNextMusicFile.Name = "buttonNextMusicFile";
             this.buttonNextMusicFile.Size = new System.Drawing.Size(49, 52);
             this.buttonNextMusicFile.TabIndex = 2;
@@ -340,7 +327,7 @@
             this.buttonPreviousMusicFile.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.buttonPreviousMusicFile.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("buttonPreviousMusicFile.BackgroundImage")));
             this.buttonPreviousMusicFile.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.buttonPreviousMusicFile.Location = new System.Drawing.Point(68, 34);
+            this.buttonPreviousMusicFile.Location = new System.Drawing.Point(17, 34);
             this.buttonPreviousMusicFile.Name = "buttonPreviousMusicFile";
             this.buttonPreviousMusicFile.Size = new System.Drawing.Size(49, 52);
             this.buttonPreviousMusicFile.TabIndex = 2;
@@ -381,21 +368,23 @@
             // addFileToolStripMenuItem
             // 
             this.addFileToolStripMenuItem.Name = "addFileToolStripMenuItem";
-            this.addFileToolStripMenuItem.Size = new System.Drawing.Size(169, 24);
+            this.addFileToolStripMenuItem.Size = new System.Drawing.Size(149, 24);
             this.addFileToolStripMenuItem.Text = "Add File";
             this.addFileToolStripMenuItem.Click += new System.EventHandler(this.addFileToolStripMenuItem_Click);
             // 
             // addFolderToolStripMenuItem
             // 
             this.addFolderToolStripMenuItem.Name = "addFolderToolStripMenuItem";
-            this.addFolderToolStripMenuItem.Size = new System.Drawing.Size(169, 24);
+            this.addFolderToolStripMenuItem.Size = new System.Drawing.Size(149, 24);
             this.addFolderToolStripMenuItem.Text = "Add Folder";
+            this.addFolderToolStripMenuItem.Click += new System.EventHandler(this.addFolderToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(169, 24);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(149, 24);
             this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
@@ -410,6 +399,7 @@
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
             this.deleteToolStripMenuItem.Size = new System.Drawing.Size(121, 24);
             this.deleteToolStripMenuItem.Text = "Delete";
+            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -431,7 +421,6 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.Vol_sl);
             this.Controls.Add(this.Time_sl);
-            this.Controls.Add(this.Eject_btn);
             this.Controls.Add(this.Stop_btn);
             this.Controls.Add(this.Play_btn);
             this.Controls.Add(this.menuStrip1);
@@ -443,6 +432,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Music Library";
             this.TransparencyKey = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -458,7 +448,6 @@
         #endregion
         private System.Windows.Forms.Button Play_btn;
         private System.Windows.Forms.Button Stop_btn;
-        private System.Windows.Forms.Button Eject_btn;
         private MB.Controls.ColorSlider Time_sl;
         private MB.Controls.ColorSlider Vol_sl;
         private System.Windows.Forms.Label label2;
@@ -488,6 +477,7 @@
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
+        private System.Windows.Forms.FolderBrowserDialog openFolderDialog1;
     }
 }
 
