@@ -1,0 +1,19 @@
+I:\C#\music project\ColorSlider\ColorSlider\bin\x86\Debug\ColorSlider.dll
+I:\C#\music project\ColorSlider\ColorSlider\bin\x86\Debug\ColorSlider.pdb
+I:\C#\music project\ColorSlider\ColorSlider\obj\x86\Debug\MB.Controls.ColorSlider.resources
+I:\C#\music project\ColorSlider\ColorSlider\obj\x86\Debug\ColorSlider.csproj.GenerateResource.Cache
+I:\C#\music project\ColorSlider\ColorSlider\obj\x86\Debug\ColorSlider.dll
+I:\C#\music project\ColorSlider\ColorSlider\obj\x86\Debug\ColorSlider.pdb
+I:\C#\Music_Library\ColorSlider\ColorSlider\bin\x86\Debug\ColorSlider.dll
+I:\C#\Music_Library\ColorSlider\ColorSlider\bin\x86\Debug\ColorSlider.pdb
+I:\C#\Music_Library\ColorSlider\ColorSlider\obj\x86\Debug\MB.Controls.ColorSlider.resources
+I:\C#\Music_Library\ColorSlider\ColorSlider\obj\x86\Debug\ColorSlider.csproj.GenerateResource.Cache
+I:\C#\Music_Library\ColorSlider\ColorSlider\obj\x86\Debug\ColorSlider.dll
+I:\C#\Music_Library\ColorSlider\ColorSlider\obj\x86\Debug\ColorSlider.pdb
+I:\C#Music_Library\Bass_project-b7f8da45200be163132482349b7d2bc72df915bd\ColorSlider\ColorSlider\bin\x86\Debug\ColorSlider.dll
+I:\C#Music_Library\Bass_project-b7f8da45200be163132482349b7d2bc72df915bd\ColorSlider\ColorSlider\bin\x86\Debug\ColorSlider.pdb
+I:\C#Music_Library\Bass_project-b7f8da45200be163132482349b7d2bc72df915bd\ColorSlider\ColorSlider\obj\x86\Debug\ColorSlider.csprojResolveAssemblyReference.cache
+I:\C#Music_Library\Bass_project-b7f8da45200be163132482349b7d2bc72df915bd\ColorSlider\ColorSlider\obj\x86\Debug\MB.Controls.ColorSlider.resources
+I:\C#Music_Library\Bass_project-b7f8da45200be163132482349b7d2bc72df915bd\ColorSlider\ColorSlider\obj\x86\Debug\ColorSlider.csproj.GenerateResource.Cache
+I:\C#Music_Library\Bass_project-b7f8da45200be163132482349b7d2bc72df915bd\ColorSlider\ColorSlider\obj\x86\Debug\ColorSlider.dll
+I:\C#Music_Library\Bass_project-b7f8da45200be163132482349b7d2bc72df915bd\ColorSlider\ColorSlider\obj\x86\Debug\ColorSlider.pdb
