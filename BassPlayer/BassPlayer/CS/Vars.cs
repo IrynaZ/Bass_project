@@ -8,6 +8,7 @@ namespace MusicLibrary
 {
     public static class Vars
     {
+
         public static List<string> Files = new List<string>();
 
         public static string GetFileName(string file)

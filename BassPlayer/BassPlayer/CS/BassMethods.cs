@@ -71,9 +71,18 @@ namespace MusicLibrary
             Bass.BASS_ChannelSetAttribute(stream, BASSAttribute.BASS_ATTRIB_VOL, Volume / 100F);
         }
 
-        public static string[] GetStreamTags(int stream)
+        public static string[] GetStreamTags(string filename)
         {
-            string[] tags = Bass.BASS_ChannelGetTagsID3V1(stream);
+            string[] tags = new string[7];
+            if (InitBass(HZ))
+            {
+                Stream = Bass.BASS_StreamCreateFile(filename, 0, 0, BASSFlag.BASS_DEFAULT);
+                if (Stream != 0)
+                {
+                    Stream = Bass.BASS_StreamCreateFile(filename, 0, 0, BASSFlag.BASS_DEFAULT);
+                    tags = Bass.BASS_ChannelGetTagsID3V1(Stream);
+                }
+            }
             return tags;
         }
 
