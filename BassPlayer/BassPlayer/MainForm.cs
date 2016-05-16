@@ -15,8 +15,9 @@ namespace MusicLibrary
     public partial class MainForm : Form
     {
         private int selectedSongIndex = 0;
-        private bool isplaying = false;        
-		List<MusicFile> musicLibraryFiles{ get; set; }
+        private bool isplaying = false;
+        private bool ispaused = false;
+        List<MusicFile> musicLibraryFiles{ get; set; }
 
         public MainForm()
         {
@@ -62,19 +63,26 @@ namespace MusicLibrary
 
         private void Play_btn_Click(object sender, EventArgs e)
         {
-            if (isplaying)
+            if (ispaused)
             {
-                BassMethods.Pause();
-                isplaying = false;
-
+                BassMethods.Resume();
+                ispaused = false;
+                isplaying = true;
             }
             else
             {
-                isplaying = true;
-                StartPlaying();
+                if (isplaying)
+                {
+                    ispaused = BassMethods.Pause();
+                    isplaying = false;
+                }
+                else
+                {
+                    StartPlaying();
+                }
             }
+            SetPlayOrPauseImage();
         }
-
         private void timer1_Tick(object sender, EventArgs e)
         {
             label2.Text = TimeSpan.FromSeconds(BassMethods.GetPosOfStream(BassMethods.Stream)).ToString();
@@ -94,9 +102,11 @@ namespace MusicLibrary
         private void Stop_btn_click(object sender, EventArgs e)
         {
             BassMethods.Stop();
+            isplaying = false;
             timer1.Enabled = false;
             Time_sl.Value = 0;
             label2.Text = "00:00:00";
+            SetPlayOrPauseImage();
         }
 
         protected void libraryTreeView_AfterSelect(object sender, TreeViewEventArgs e)
@@ -215,6 +225,7 @@ namespace MusicLibrary
 
         private void buttonNextMusicFile_Click(object sender, EventArgs e)
         {
+            selectedSongIndex = musicFilesListView.SelectedItems.IndexOf(musicFilesListView.SelectedItems[0]);
             BassMethods.Stop();
             musicFilesListView.Items[selectedSongIndex].Selected = false;
 
@@ -223,15 +234,13 @@ namespace MusicLibrary
             else
                 ++selectedSongIndex;
 
-
-
             musicFilesListView.Items[selectedSongIndex].Selected = true;
-
             StartPlaying();
         }
 
         private void buttonPreviousMusicFile_Click(object sender, EventArgs e)
         {
+            selectedSongIndex = musicFilesListView.SelectedItems.IndexOf(musicFilesListView.SelectedItems[0]);
             BassMethods.Stop();
             musicFilesListView.Items[selectedSongIndex].Selected = false;
 
@@ -382,6 +391,20 @@ namespace MusicLibrary
                 Time_sl.Maximum = BassMethods.GetTimeOfStream(BassMethods.Stream);
                 Time_sl.Value = BassMethods.GetPosOfStream(BassMethods.Stream);
                 timer1.Enabled = true;
+                isplaying = true;
+                SetPlayOrPauseImage();
+            }
+        }
+
+        private void SetPlayOrPauseImage()
+        {
+            if (isplaying)
+            {
+                Play_btn.BackgroundImage = global::BassPlayer.Properties.Resources.player_pause_9601;
+            }
+            else
+            {
+                Play_btn.BackgroundImage = global::BassPlayer.Properties.Resources.player_play_2538;
             }
         }
     }

@@ -29,15 +29,15 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Songs", 0, 1);
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Artists", 0, 1);
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Albums", 0, 1);
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Genres", 0, 1);
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Music", new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2,
-            treeNode3,
-            treeNode4});
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Songs", 0, 1);
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Artists", 0, 1);
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Albums", 0, 1);
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Genres", 0, 1);
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Music", new System.Windows.Forms.TreeNode[] {
+            treeNode6,
+            treeNode7,
+            treeNode8,
+            treeNode9});
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -161,26 +161,26 @@
             this.libraryTreeView.ImageList = this.imageList1;
             this.libraryTreeView.Location = new System.Drawing.Point(0, 0);
             this.libraryTreeView.Name = "libraryTreeView";
-            treeNode1.ImageIndex = 0;
-            treeNode1.Name = "Songs";
-            treeNode1.SelectedImageIndex = 1;
-            treeNode1.Text = "Songs";
-            treeNode2.ImageIndex = 0;
-            treeNode2.Name = "Artists";
-            treeNode2.SelectedImageIndex = 1;
-            treeNode2.Text = "Artists";
-            treeNode3.ImageIndex = 0;
-            treeNode3.Name = "Albums";
-            treeNode3.SelectedImageIndex = 1;
-            treeNode3.Text = "Albums";
-            treeNode4.ImageIndex = 0;
-            treeNode4.Name = "Genres";
-            treeNode4.SelectedImageIndex = 1;
-            treeNode4.Text = "Genres";
-            treeNode5.Name = "Music";
-            treeNode5.Text = "Music";
+            treeNode6.ImageIndex = 0;
+            treeNode6.Name = "Songs";
+            treeNode6.SelectedImageIndex = 1;
+            treeNode6.Text = "Songs";
+            treeNode7.ImageIndex = 0;
+            treeNode7.Name = "Artists";
+            treeNode7.SelectedImageIndex = 1;
+            treeNode7.Text = "Artists";
+            treeNode8.ImageIndex = 0;
+            treeNode8.Name = "Albums";
+            treeNode8.SelectedImageIndex = 1;
+            treeNode8.Text = "Albums";
+            treeNode9.ImageIndex = 0;
+            treeNode9.Name = "Genres";
+            treeNode9.SelectedImageIndex = 1;
+            treeNode9.Text = "Genres";
+            treeNode10.Name = "Music";
+            treeNode10.Text = "Music";
             this.libraryTreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode5});
+            treeNode10});
             this.libraryTreeView.SelectedImageIndex = 0;
             this.libraryTreeView.Size = new System.Drawing.Size(277, 236);
             this.libraryTreeView.TabIndex = 0;
@@ -383,7 +383,7 @@
             // Play_btn
             // 
             this.Play_btn.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.Play_btn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Play_btn.BackgroundImage")));
+            this.Play_btn.BackgroundImage = global::BassPlayer.Properties.Resources.player_play_2538;
             this.Play_btn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Play_btn.Location = new System.Drawing.Point(70, 35);
             this.Play_btn.Name = "Play_btn";

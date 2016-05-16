@@ -43,13 +43,19 @@ namespace MusicLibrary
 
         }
 
+        public static void Resume()
+        {
+            Bass.BASS_ChannelPlay(Stream, false);
+        }
 
-        public static void Pause()
+        public static bool Pause()
         {
             if (Bass.BASS_ChannelIsActive(Stream) == BASSActive.BASS_ACTIVE_PLAYING)
             {
                 Bass.BASS_ChannelPause(Stream);
+                return true;
             }
+            return false;
         }
 
         public static void Stop()

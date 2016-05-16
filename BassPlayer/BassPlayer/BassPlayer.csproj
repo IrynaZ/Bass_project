@@ -97,6 +97,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bass.dll" />
+    <None Include="Resources\player_pause_9601.png" />
+    <None Include="Resources\player_play_2538.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\ColorSlider\ColorSlider\ColorSlider.csproj">
@@ -104,9 +106,7 @@
       <Name>ColorSlider</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
