@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MusicLibrary.Properties {
+namespace BassPlayer.Properties {
     using System;
     
     
@@ -57,36 +57,6 @@ namespace MusicLibrary.Properties {
             }
             set {
                 resourceCulture = value;
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap arrow_down_6345 {
-            get {
-                object obj = ResourceManager.GetObject("arrow-down_6345", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap gtk_media_stop_3075 {
-            get {
-                object obj = ResourceManager.GetObject("gtk-media-stop_3075", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap play_mark_3482 {
-            get {
-                object obj = ResourceManager.GetObject("play-mark_3482", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

@@ -38,6 +38,18 @@ namespace MusicLibrary
                     Bass.BASS_ChannelPlay(Stream, false);
                 }
             }
+            else
+                Bass.BASS_ChannelPlay(Stream, false);
+
+        }
+
+
+        public static void Pause()
+        {
+            if (Bass.BASS_ChannelIsActive(Stream) == BASSActive.BASS_ACTIVE_PLAYING)
+            {
+                Bass.BASS_ChannelPause(Stream);
+            }
         }
 
         public static void Stop()

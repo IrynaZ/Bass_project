@@ -29,18 +29,16 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Songs", 0, 1);
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Artists", 0, 1);
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Albums", 0, 1);
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Genres", 0, 1);
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Music", new System.Windows.Forms.TreeNode[] {
+            treeNode1,
+            treeNode2,
+            treeNode3,
+            treeNode4});
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Songs", 0, 1);
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Artists", 0, 1);
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Albums", 0, 1);
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Genres", 0, 1);
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Music", new System.Windows.Forms.TreeNode[] {
-            treeNode6,
-            treeNode7,
-            treeNode8,
-            treeNode9});
-            this.Stop_btn = new System.Windows.Forms.Button();
-            this.Play_btn = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
@@ -54,12 +52,6 @@
             this.imageList2 = new System.Windows.Forms.ImageList(this.components);
             this.labelFilePlaying = new System.Windows.Forms.Label();
             this.labelView = new System.Windows.Forms.Label();
-            this.buttonViewList = new System.Windows.Forms.Button();
-            this.buttonIconsView = new System.Windows.Forms.Button();
-            this.buttonDetailsView = new System.Windows.Forms.Button();
-            this.buttonNextMusicFile = new System.Windows.Forms.Button();
-            this.buttonPreviousMusicFile = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -68,38 +60,21 @@
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFolderDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.buttonPreviousMusicFile = new System.Windows.Forms.Button();
+            this.buttonNextMusicFile = new System.Windows.Forms.Button();
+            this.buttonDetailsView = new System.Windows.Forms.Button();
+            this.buttonIconsView = new System.Windows.Forms.Button();
+            this.buttonViewList = new System.Windows.Forms.Button();
+            this.Stop_btn = new System.Windows.Forms.Button();
+            this.Play_btn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // Stop_btn
-            // 
-            this.Stop_btn.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.Stop_btn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Stop_btn.BackgroundImage")));
-            this.Stop_btn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.Stop_btn.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.Stop_btn.Location = new System.Drawing.Point(123, 35);
-            this.Stop_btn.Name = "Stop_btn";
-            this.Stop_btn.Size = new System.Drawing.Size(51, 52);
-            this.Stop_btn.TabIndex = 1;
-            this.Stop_btn.UseVisualStyleBackColor = false;
-            this.Stop_btn.Click += new System.EventHandler(this.Stop_btn_click);
-            // 
-            // Play_btn
-            // 
-            this.Play_btn.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.Play_btn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Play_btn.BackgroundImage")));
-            this.Play_btn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.Play_btn.Location = new System.Drawing.Point(70, 35);
-            this.Play_btn.Name = "Play_btn";
-            this.Play_btn.Size = new System.Drawing.Size(49, 52);
-            this.Play_btn.TabIndex = 1;
-            this.Play_btn.UseVisualStyleBackColor = false;
-            this.Play_btn.Click += new System.EventHandler(this.Play_btn_Click);
             // 
             // label2
             // 
@@ -186,26 +161,26 @@
             this.libraryTreeView.ImageList = this.imageList1;
             this.libraryTreeView.Location = new System.Drawing.Point(0, 0);
             this.libraryTreeView.Name = "libraryTreeView";
-            treeNode6.ImageIndex = 0;
-            treeNode6.Name = "Songs";
-            treeNode6.SelectedImageIndex = 1;
-            treeNode6.Text = "Songs";
-            treeNode7.ImageIndex = 0;
-            treeNode7.Name = "Artists";
-            treeNode7.SelectedImageIndex = 1;
-            treeNode7.Text = "Artists";
-            treeNode8.ImageIndex = 0;
-            treeNode8.Name = "Albums";
-            treeNode8.SelectedImageIndex = 1;
-            treeNode8.Text = "Albums";
-            treeNode9.ImageIndex = 0;
-            treeNode9.Name = "Genres";
-            treeNode9.SelectedImageIndex = 1;
-            treeNode9.Text = "Genres";
-            treeNode10.Name = "Music";
-            treeNode10.Text = "Music";
+            treeNode1.ImageIndex = 0;
+            treeNode1.Name = "Songs";
+            treeNode1.SelectedImageIndex = 1;
+            treeNode1.Text = "Songs";
+            treeNode2.ImageIndex = 0;
+            treeNode2.Name = "Artists";
+            treeNode2.SelectedImageIndex = 1;
+            treeNode2.Text = "Artists";
+            treeNode3.ImageIndex = 0;
+            treeNode3.Name = "Albums";
+            treeNode3.SelectedImageIndex = 1;
+            treeNode3.Text = "Albums";
+            treeNode4.ImageIndex = 0;
+            treeNode4.Name = "Genres";
+            treeNode4.SelectedImageIndex = 1;
+            treeNode4.Text = "Genres";
+            treeNode5.Name = "Music";
+            treeNode5.Text = "Music";
             this.libraryTreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode10});
+            treeNode5});
             this.libraryTreeView.SelectedImageIndex = 0;
             this.libraryTreeView.Size = new System.Drawing.Size(277, 236);
             this.libraryTreeView.TabIndex = 0;
@@ -260,76 +235,6 @@
             this.labelView.Size = new System.Drawing.Size(46, 21);
             this.labelView.TabIndex = 11;
             this.labelView.Text = "View";
-            // 
-            // buttonViewList
-            // 
-            this.buttonViewList.BackColor = System.Drawing.Color.White;
-            this.buttonViewList.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("buttonViewList.BackgroundImage")));
-            this.buttonViewList.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.buttonViewList.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.buttonViewList.Location = new System.Drawing.Point(737, 35);
-            this.buttonViewList.Name = "buttonViewList";
-            this.buttonViewList.Size = new System.Drawing.Size(49, 52);
-            this.buttonViewList.TabIndex = 12;
-            this.buttonViewList.UseVisualStyleBackColor = false;
-            this.buttonViewList.Click += new System.EventHandler(this.buttonViewList_Click);
-            // 
-            // buttonIconsView
-            // 
-            this.buttonIconsView.BackColor = System.Drawing.Color.White;
-            this.buttonIconsView.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("buttonIconsView.BackgroundImage")));
-            this.buttonIconsView.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.buttonIconsView.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.buttonIconsView.Location = new System.Drawing.Point(690, 35);
-            this.buttonIconsView.Name = "buttonIconsView";
-            this.buttonIconsView.Size = new System.Drawing.Size(49, 52);
-            this.buttonIconsView.TabIndex = 13;
-            this.buttonIconsView.UseVisualStyleBackColor = false;
-            this.buttonIconsView.Click += new System.EventHandler(this.buttonIconsView_Click);
-            // 
-            // buttonDetailsView
-            // 
-            this.buttonDetailsView.BackColor = System.Drawing.Color.White;
-            this.buttonDetailsView.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("buttonDetailsView.BackgroundImage")));
-            this.buttonDetailsView.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.buttonDetailsView.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.buttonDetailsView.Location = new System.Drawing.Point(784, 35);
-            this.buttonDetailsView.Name = "buttonDetailsView";
-            this.buttonDetailsView.Size = new System.Drawing.Size(49, 52);
-            this.buttonDetailsView.TabIndex = 14;
-            this.buttonDetailsView.UseVisualStyleBackColor = false;
-            this.buttonDetailsView.Click += new System.EventHandler(this.buttonDetailsView_Click);
-            // 
-            // buttonNextMusicFile
-            // 
-            this.buttonNextMusicFile.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.buttonNextMusicFile.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("buttonNextMusicFile.BackgroundImage")));
-            this.buttonNextMusicFile.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.buttonNextMusicFile.Location = new System.Drawing.Point(179, 35);
-            this.buttonNextMusicFile.Name = "buttonNextMusicFile";
-            this.buttonNextMusicFile.Size = new System.Drawing.Size(49, 52);
-            this.buttonNextMusicFile.TabIndex = 2;
-            this.buttonNextMusicFile.UseVisualStyleBackColor = false;
-            // 
-            // buttonPreviousMusicFile
-            // 
-            this.buttonPreviousMusicFile.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.buttonPreviousMusicFile.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("buttonPreviousMusicFile.BackgroundImage")));
-            this.buttonPreviousMusicFile.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.buttonPreviousMusicFile.Location = new System.Drawing.Point(17, 34);
-            this.buttonPreviousMusicFile.Name = "buttonPreviousMusicFile";
-            this.buttonPreviousMusicFile.Size = new System.Drawing.Size(49, 52);
-            this.buttonPreviousMusicFile.TabIndex = 2;
-            this.buttonPreviousMusicFile.UseVisualStyleBackColor = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(387, 43);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(36, 33);
-            this.pictureBox1.TabIndex = 16;
-            this.pictureBox1.TabStop = false;
             // 
             // menuStrip1
             // 
@@ -390,6 +295,103 @@
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(387, 43);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(36, 33);
+            this.pictureBox1.TabIndex = 16;
+            this.pictureBox1.TabStop = false;
+            // 
+            // buttonPreviousMusicFile
+            // 
+            this.buttonPreviousMusicFile.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.buttonPreviousMusicFile.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("buttonPreviousMusicFile.BackgroundImage")));
+            this.buttonPreviousMusicFile.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.buttonPreviousMusicFile.Location = new System.Drawing.Point(17, 34);
+            this.buttonPreviousMusicFile.Name = "buttonPreviousMusicFile";
+            this.buttonPreviousMusicFile.Size = new System.Drawing.Size(49, 52);
+            this.buttonPreviousMusicFile.TabIndex = 2;
+            this.buttonPreviousMusicFile.UseVisualStyleBackColor = false;
+            this.buttonPreviousMusicFile.Click += new System.EventHandler(this.buttonPreviousMusicFile_Click);
+            // 
+            // buttonNextMusicFile
+            // 
+            this.buttonNextMusicFile.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.buttonNextMusicFile.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("buttonNextMusicFile.BackgroundImage")));
+            this.buttonNextMusicFile.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.buttonNextMusicFile.Location = new System.Drawing.Point(179, 35);
+            this.buttonNextMusicFile.Name = "buttonNextMusicFile";
+            this.buttonNextMusicFile.Size = new System.Drawing.Size(49, 52);
+            this.buttonNextMusicFile.TabIndex = 2;
+            this.buttonNextMusicFile.UseVisualStyleBackColor = false;
+            this.buttonNextMusicFile.Click += new System.EventHandler(this.buttonNextMusicFile_Click);
+            // 
+            // buttonDetailsView
+            // 
+            this.buttonDetailsView.BackColor = System.Drawing.Color.White;
+            this.buttonDetailsView.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("buttonDetailsView.BackgroundImage")));
+            this.buttonDetailsView.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.buttonDetailsView.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.buttonDetailsView.Location = new System.Drawing.Point(784, 35);
+            this.buttonDetailsView.Name = "buttonDetailsView";
+            this.buttonDetailsView.Size = new System.Drawing.Size(49, 52);
+            this.buttonDetailsView.TabIndex = 14;
+            this.buttonDetailsView.UseVisualStyleBackColor = false;
+            this.buttonDetailsView.Click += new System.EventHandler(this.buttonDetailsView_Click);
+            // 
+            // buttonIconsView
+            // 
+            this.buttonIconsView.BackColor = System.Drawing.Color.White;
+            this.buttonIconsView.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("buttonIconsView.BackgroundImage")));
+            this.buttonIconsView.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.buttonIconsView.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.buttonIconsView.Location = new System.Drawing.Point(690, 35);
+            this.buttonIconsView.Name = "buttonIconsView";
+            this.buttonIconsView.Size = new System.Drawing.Size(49, 52);
+            this.buttonIconsView.TabIndex = 13;
+            this.buttonIconsView.UseVisualStyleBackColor = false;
+            this.buttonIconsView.Click += new System.EventHandler(this.buttonIconsView_Click);
+            // 
+            // buttonViewList
+            // 
+            this.buttonViewList.BackColor = System.Drawing.Color.White;
+            this.buttonViewList.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("buttonViewList.BackgroundImage")));
+            this.buttonViewList.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.buttonViewList.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.buttonViewList.Location = new System.Drawing.Point(737, 35);
+            this.buttonViewList.Name = "buttonViewList";
+            this.buttonViewList.Size = new System.Drawing.Size(49, 52);
+            this.buttonViewList.TabIndex = 12;
+            this.buttonViewList.UseVisualStyleBackColor = false;
+            this.buttonViewList.Click += new System.EventHandler(this.buttonViewList_Click);
+            // 
+            // Stop_btn
+            // 
+            this.Stop_btn.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.Stop_btn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Stop_btn.BackgroundImage")));
+            this.Stop_btn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Stop_btn.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.Stop_btn.Location = new System.Drawing.Point(123, 35);
+            this.Stop_btn.Name = "Stop_btn";
+            this.Stop_btn.Size = new System.Drawing.Size(51, 52);
+            this.Stop_btn.TabIndex = 1;
+            this.Stop_btn.UseVisualStyleBackColor = false;
+            this.Stop_btn.Click += new System.EventHandler(this.Stop_btn_click);
+            // 
+            // Play_btn
+            // 
+            this.Play_btn.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.Play_btn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Play_btn.BackgroundImage")));
+            this.Play_btn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Play_btn.Location = new System.Drawing.Point(70, 35);
+            this.Play_btn.Name = "Play_btn";
+            this.Play_btn.Size = new System.Drawing.Size(49, 52);
+            this.Play_btn.TabIndex = 1;
+            this.Play_btn.UseVisualStyleBackColor = false;
+            this.Play_btn.Click += new System.EventHandler(this.Play_btn_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -426,9 +428,9 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

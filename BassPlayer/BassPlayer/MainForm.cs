@@ -14,7 +14,9 @@ namespace MusicLibrary
 {
     public partial class MainForm : Form
     {
-        List<MusicFile> musicLibraryFiles{ get; set; }
+        private int selectedSongIndex = 0;
+        private bool isplaying = false;        
+		List<MusicFile> musicLibraryFiles{ get; set; }
 
         public MainForm()
         {
@@ -31,8 +33,8 @@ namespace MusicLibrary
                     musicFilesListView.Items.Add(new ListViewItem(new[] {musicItem.fileName, musicItem.song, musicItem.artist, musicItem.album, musicItem.genre }));
                 }
             }
-            ListViewItemsSetIcon(2);
             AddColumnsToListView(new[] { "File Name", "Song", "Artist", "Album", "Genre" });
+            SetDefaultView();
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -53,12 +55,24 @@ namespace MusicLibrary
                 Vars.Files.Add(file);
                 musicFilesListView.Items.Add(Vars.GetFileName(file));
                 musicLibraryFiles.Add(new MusicFile(file));
+                SetDefaultView();
             }
+
         }
 
         private void Play_btn_Click(object sender, EventArgs e)
         {
-            PerformPlay();
+            if (isplaying)
+            {
+                BassMethods.Pause();
+                isplaying = false;
+
+            }
+            else
+            {
+                isplaying = true;
+                StartPlaying();
+            }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -176,6 +190,7 @@ namespace MusicLibrary
                     }
                 }
             }
+            SetDefaultView();
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -193,26 +208,61 @@ namespace MusicLibrary
                     MusicFile musicItem = musicLibraryFiles.Find(x => (x.fileName == selection) || (x.song == selection));
                     item.Remove();
                     Vars.Files.Remove(musicItem.filePath);
+                    musicLibraryFiles.Remove(musicItem);
                 }
             }
         }
 
+        private void buttonNextMusicFile_Click(object sender, EventArgs e)
+        {
+            BassMethods.Stop();
+            musicFilesListView.Items[selectedSongIndex].Selected = false;
+
+            if (selectedSongIndex >= musicFilesListView.Items.Count - 1)
+                selectedSongIndex = 0;
+            else
+                ++selectedSongIndex;
+
+
+
+            musicFilesListView.Items[selectedSongIndex].Selected = true;
+
+            StartPlaying();
+        }
+
+        private void buttonPreviousMusicFile_Click(object sender, EventArgs e)
+        {
+            BassMethods.Stop();
+            musicFilesListView.Items[selectedSongIndex].Selected = false;
+
+            if (selectedSongIndex == 0 )
+                selectedSongIndex = musicFilesListView.Items.Count - 1;
+            else
+                --selectedSongIndex;
+
+            musicFilesListView.Items[selectedSongIndex].Selected = true;
+            StartPlaying();
+        }
+
+
         private void buttonIconsView_Click(object sender, EventArgs e)
         {
             musicFilesListView.View = View.LargeIcon;
-            ChangeView();
+            ChangeViewIcons();
         }
 
         private void buttonViewList_Click(object sender, EventArgs e)
         {
             musicFilesListView.View = View.List;
             musicFilesListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+            ChangeViewIcons();
         }
 
         private void buttonDetailsView_Click(object sender, EventArgs e)
         {
             musicFilesListView.View = View.Details;
             musicFilesListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+            ChangeViewIcons();
         }
 
         private void ListViewItemsSetIcon(int iconID)
@@ -240,7 +290,7 @@ namespace MusicLibrary
                 {
                     case "Music":
                     case "Songs":
-                        PerformPlay();
+                        StartPlaying();
                         break;
                     case "Artists":
                         string artist = musicFilesListView.SelectedItems[0].Text;
@@ -250,7 +300,7 @@ namespace MusicLibrary
                             musicFilesListView.Items.Add(new ListViewItem(new[] { musicItem.fileName, musicItem.song, musicItem.artist, musicItem.album, musicItem.genre }));
                         }
                         AddColumnsToListView(new[] { "File Name", "Song", "Artist", "Album", "Genre" });
-                        ChangeView();
+                        ChangeViewIcons();
                         libraryTreeView.SelectedNode = null;
                         break;
                     case "Albums":
@@ -261,7 +311,7 @@ namespace MusicLibrary
                             musicFilesListView.Items.Add(new ListViewItem(new[] { musicItem.fileName, musicItem.song, musicItem.artist, musicItem.album, musicItem.genre }));
                         }
                         AddColumnsToListView(new[] { "File Name", "Song", "Artist", "Album", "Genre" });
-                        ChangeView();
+                        ChangeViewIcons();
                         libraryTreeView.SelectedNode = null;
                         break;
                     case "Genres":
@@ -272,16 +322,23 @@ namespace MusicLibrary
                             musicFilesListView.Items.Add(new ListViewItem(new[] { musicItem.fileName, musicItem.song, musicItem.artist, musicItem.album, musicItem.genre }));
                         }
                         AddColumnsToListView(new[] { "File Name", "Song", "Artist", "Album", "Genre" });
-                        ChangeView();
+                        ChangeViewIcons();
                         libraryTreeView.SelectedNode = null;
                         break;
                 }
             }
             else
-                PerformPlay();
+                StartPlaying();
         }
 
-        private void ChangeView()
+        private void SetDefaultView()
+        {
+            musicFilesListView.View = View.List;
+            libraryTreeView.SelectedNode = libraryTreeView.Nodes[0];
+            ListViewItemsSetIcon(2);
+        }
+
+        private void ChangeViewIcons()
         {
             if ((libraryTreeView.SelectedNode == null) || (libraryTreeView.SelectedNode.Text == "Music") || (libraryTreeView.SelectedNode.Text == "Songs"))
             {
@@ -312,7 +369,7 @@ namespace MusicLibrary
             }
         }
 
-        private void PerformPlay()
+        private void StartPlaying()
         {
             if ((musicFilesListView.Items.Count != 0) && (musicFilesListView.SelectedIndices != null))
             {
