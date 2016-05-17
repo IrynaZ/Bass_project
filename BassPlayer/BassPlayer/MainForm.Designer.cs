@@ -29,15 +29,15 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Songs", 0, 1);
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Artists", 0, 1);
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Albums", 0, 1);
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Genres", 0, 1);
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Music", new System.Windows.Forms.TreeNode[] {
-            treeNode6,
-            treeNode7,
-            treeNode8,
-            treeNode9});
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Songs", 0, 1);
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Artists", 0, 1);
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Albums", 0, 1);
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Genres", 0, 1);
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Music", new System.Windows.Forms.TreeNode[] {
+            treeNode1,
+            treeNode2,
+            treeNode3,
+            treeNode4});
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -82,7 +82,7 @@
             this.label2.Font = new System.Drawing.Font("Tahoma", 7.854546F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label2.Location = new System.Drawing.Point(332, 346);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(60, 16);
+            this.label2.Size = new System.Drawing.Size(51, 13);
             this.label2.TabIndex = 7;
             this.label2.Text = "00:00:00";
             // 
@@ -92,7 +92,7 @@
             this.label3.Font = new System.Drawing.Font("Tahoma", 7.854546F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label3.Location = new System.Drawing.Point(760, 346);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(60, 16);
+            this.label3.Size = new System.Drawing.Size(51, 13);
             this.label3.TabIndex = 8;
             this.label3.Text = "00:00:00";
             // 
@@ -161,26 +161,26 @@
             this.libraryTreeView.ImageList = this.imageList1;
             this.libraryTreeView.Location = new System.Drawing.Point(0, 0);
             this.libraryTreeView.Name = "libraryTreeView";
-            treeNode6.ImageIndex = 0;
-            treeNode6.Name = "Songs";
-            treeNode6.SelectedImageIndex = 1;
-            treeNode6.Text = "Songs";
-            treeNode7.ImageIndex = 0;
-            treeNode7.Name = "Artists";
-            treeNode7.SelectedImageIndex = 1;
-            treeNode7.Text = "Artists";
-            treeNode8.ImageIndex = 0;
-            treeNode8.Name = "Albums";
-            treeNode8.SelectedImageIndex = 1;
-            treeNode8.Text = "Albums";
-            treeNode9.ImageIndex = 0;
-            treeNode9.Name = "Genres";
-            treeNode9.SelectedImageIndex = 1;
-            treeNode9.Text = "Genres";
-            treeNode10.Name = "Music";
-            treeNode10.Text = "Music";
+            treeNode1.ImageIndex = 0;
+            treeNode1.Name = "Songs";
+            treeNode1.SelectedImageIndex = 1;
+            treeNode1.Text = "Songs";
+            treeNode2.ImageIndex = 0;
+            treeNode2.Name = "Artists";
+            treeNode2.SelectedImageIndex = 1;
+            treeNode2.Text = "Artists";
+            treeNode3.ImageIndex = 0;
+            treeNode3.Name = "Albums";
+            treeNode3.SelectedImageIndex = 1;
+            treeNode3.Text = "Albums";
+            treeNode4.ImageIndex = 0;
+            treeNode4.Name = "Genres";
+            treeNode4.SelectedImageIndex = 1;
+            treeNode4.Text = "Genres";
+            treeNode5.Name = "Music";
+            treeNode5.Text = "Music";
             this.libraryTreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode10});
+            treeNode5});
             this.libraryTreeView.SelectedImageIndex = 0;
             this.libraryTreeView.Size = new System.Drawing.Size(277, 236);
             this.libraryTreeView.TabIndex = 0;
@@ -222,9 +222,10 @@
             this.labelFilePlaying.Font = new System.Drawing.Font("Tahoma", 7.854546F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.labelFilePlaying.Location = new System.Drawing.Point(17, 360);
             this.labelFilePlaying.Name = "labelFilePlaying";
-            this.labelFilePlaying.Size = new System.Drawing.Size(20, 16);
+            this.labelFilePlaying.Size = new System.Drawing.Size(19, 13);
             this.labelFilePlaying.TabIndex = 10;
             this.labelFilePlaying.Text = "...";
+            
             // 
             // labelView
             // 
@@ -232,7 +233,7 @@
             this.labelView.Font = new System.Drawing.Font("Tahoma", 11.12727F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.labelView.Location = new System.Drawing.Point(639, 49);
             this.labelView.Name = "labelView";
-            this.labelView.Size = new System.Drawing.Size(46, 21);
+            this.labelView.Size = new System.Drawing.Size(37, 18);
             this.labelView.TabIndex = 11;
             this.labelView.Text = "View";
             // 
@@ -245,7 +246,7 @@
             this.editToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(856, 27);
+            this.menuStrip1.Size = new System.Drawing.Size(856, 24);
             this.menuStrip1.TabIndex = 17;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -256,27 +257,27 @@
             this.addFolderToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(41, 23);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // addFileToolStripMenuItem
             // 
             this.addFileToolStripMenuItem.Name = "addFileToolStripMenuItem";
-            this.addFileToolStripMenuItem.Size = new System.Drawing.Size(149, 24);
+            this.addFileToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.addFileToolStripMenuItem.Text = "Add File";
             this.addFileToolStripMenuItem.Click += new System.EventHandler(this.addFileToolStripMenuItem_Click);
             // 
             // addFolderToolStripMenuItem
             // 
             this.addFolderToolStripMenuItem.Name = "addFolderToolStripMenuItem";
-            this.addFolderToolStripMenuItem.Size = new System.Drawing.Size(149, 24);
+            this.addFolderToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.addFolderToolStripMenuItem.Text = "Add Folder";
             this.addFolderToolStripMenuItem.Click += new System.EventHandler(this.addFolderToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(149, 24);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -285,13 +286,13 @@
             this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.deleteToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(44, 23);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
             this.editToolStripMenuItem.Text = "Edit";
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(121, 24);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 

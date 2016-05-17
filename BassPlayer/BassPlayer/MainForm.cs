@@ -80,6 +80,21 @@ namespace MusicLibrary
         {
             label2.Text = TimeSpan.FromSeconds(BassMethods.GetPosOfStream(BassMethods.Stream)).ToString();
             Time_sl.Value = BassMethods.GetPosOfStream(BassMethods.Stream);
+
+            if (BassMethods.ToNextTrack())
+            {
+                selectedSongIndex = Vars.CurrentTrackNumber;
+                label2.Text = TimeSpan.FromSeconds(BassMethods.GetPosOfStream(BassMethods.Stream)).ToString();
+                label3.Text = TimeSpan.FromSeconds(BassMethods.GetTimeOfStream(BassMethods.Stream)).ToString();
+                Time_sl.Maximum = BassMethods.GetTimeOfStream(BassMethods.Stream);
+                Time_sl.Value = BassMethods.GetPosOfStream(BassMethods.Stream);
+            }
+            if (BassMethods.EndPlaylist)
+            {
+                Stop_btn_click(this, new EventArgs());
+                selectedSongIndex = Vars.CurrentTrackNumber = 0;
+                BassMethods.EndPlaylist = false;
+            }
         }
 
         private void sliderVolume_Scroll(object sender, ScrollEventArgs e)
@@ -196,7 +211,7 @@ namespace MusicLibrary
 
         private void buttonNextMusicFile_Click(object sender, EventArgs e)
         {
-            selectedSongIndex = musicFilesListView.SelectedItems.IndexOf(musicFilesListView.SelectedItems[0]);
+            
             BassMethods.Stop();
             musicFilesListView.Items[selectedSongIndex].Selected = false;
 
@@ -211,7 +226,7 @@ namespace MusicLibrary
 
         private void buttonPreviousMusicFile_Click(object sender, EventArgs e)
         {
-            selectedSongIndex = musicFilesListView.SelectedItems.IndexOf(musicFilesListView.SelectedItems[0]);
+            
             BassMethods.Stop();
             musicFilesListView.Items[selectedSongIndex].Selected = false;
 
@@ -356,6 +371,7 @@ namespace MusicLibrary
             if ((musicFilesListView.Items.Count != 0) && (musicFilesListView.SelectedIndices != null))
             {
                 string selection = musicFilesListView.SelectedItems[0].Text;
+             
                 MusicFile currentMF = musicLibraryFiles.Find(x => (x.fileName == selection) || (x.song == selection));
                 labelFilePlaying.Text = currentMF.fileName;
                 BassMethods.Play(currentMF.filePath, BassMethods.Volume);
@@ -380,5 +396,7 @@ namespace MusicLibrary
                 Play_btn.BackgroundImage = global::BassPlayer.Properties.Resources.player_play_2538;
             }
         }
+
+     
     }
 }

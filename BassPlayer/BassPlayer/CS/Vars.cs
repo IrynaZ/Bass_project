@@ -10,6 +10,7 @@ namespace MusicLibrary
     {
 
         public static List<string> Files = new List<string>();
+        public static int CurrentTrackNumber;
 
         public static string GetFileName(string file)
         {

@@ -16,8 +16,11 @@ namespace MusicLibrary
         //канал
         public static int Stream;
         public static int Volume = 100;
+        public static bool IsStopped = false;
+        public static bool EndPlaylist;
 
-        private static bool InitBass(int hz)
+
+    private static bool InitBass(int hz)
         {
             if(!InitDefaultDevice)
                 InitDefaultDevice = Bass.BASS_Init(-1, hz, BASSInit.BASS_DEVICE_DEFAULT, IntPtr.Zero);
@@ -27,20 +30,23 @@ namespace MusicLibrary
 
         public static void Play(string filename, int vol)
         {
-            Stop();
-            if (InitBass(HZ))
+            if (Bass.BASS_ChannelIsActive(Stream) != BASSActive.BASS_ACTIVE_PAUSED)
             {
-                Stream = Bass.BASS_StreamCreateFile(filename, 0, 0, BASSFlag.BASS_DEFAULT);
-                if ( Stream != 0)
+                Stop();
+                if (InitBass(HZ))
                 {
-                    Volume = vol;
-                    Bass.BASS_ChannelSetAttribute(Stream, BASSAttribute.BASS_ATTRIB_VOL, Volume / 100F);
-                    Bass.BASS_ChannelPlay(Stream, false);
+                    Stream = Bass.BASS_StreamCreateFile(filename, 0, 0, BASSFlag.BASS_DEFAULT);
+                    if (Stream != 0)
+                    {
+                        Volume = vol;
+                        Bass.BASS_ChannelSetAttribute(Stream, BASSAttribute.BASS_ATTRIB_VOL, Volume / 100F);
+                        Bass.BASS_ChannelPlay(Stream, false);
+                    }
                 }
             }
             else
                 Bass.BASS_ChannelPlay(Stream, false);
-
+            IsStopped = false;
         }
 
         public static void Resume()
@@ -60,8 +66,25 @@ namespace MusicLibrary
 
         public static void Stop()
         {
+            IsStopped = true;
             Bass.BASS_ChannelStop(Stream);
             Bass.BASS_StreamFree(Stream);
+        }
+
+        public static bool ToNextTrack()
+        {
+            if ((Bass.BASS_ChannelIsActive(Stream) == BASSActive.BASS_ACTIVE_STOPPED) && (!IsStopped))
+            {
+                if (Vars.Files.Count > Vars.CurrentTrackNumber + 1)
+                {
+                    Play(Vars.Files[++Vars.CurrentTrackNumber], Volume);
+                    EndPlaylist = false;
+                    return true;
+                }
+                else
+                    EndPlaylist = true;
+            }
+            return false;
         }
 
         public static int GetTimeOfStream(int stream)
@@ -102,7 +125,6 @@ namespace MusicLibrary
                 }
             }
             return tags;
-        }
-
+        }    
     }
 }
