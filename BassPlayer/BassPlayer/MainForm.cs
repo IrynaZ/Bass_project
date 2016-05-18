@@ -141,7 +141,8 @@ namespace MusicLibrary
                 case "Songs":
                     foreach (MusicFile musicItem in musicLibraryFiles)
                     {
-                        musicFilesListView.Items.Add(new ListViewItem(new[] { musicItem.song, musicItem.fileName, musicItem.artist, musicItem.album, musicItem.genre }));
+                        if (musicItem.song != null)
+                            musicFilesListView.Items.Add(new ListViewItem(new[] { musicItem.song, musicItem.fileName, musicItem.artist, musicItem.album, musicItem.genre }));
                     }
                     AddColumnsToListView(new[] { "Song", "File Name", "Artist", "Album", "Genre" });
                     ListViewItemsSetIcon(2);
@@ -169,7 +170,8 @@ namespace MusicLibrary
                     itemsNoDuplicates = items.Distinct().ToList<string>();
                     foreach (string item in itemsNoDuplicates)
                     {
-                        musicFilesListView.Items.Add(new ListViewItem(new[] { item }));
+                        if (item != null)
+                            musicFilesListView.Items.Add(new ListViewItem(new[] { item }));
                     }
                     AddColumnsToListView(new[] { e.Node.Text.ToString() });
                     ListViewItemsSetIcon(1);                 
