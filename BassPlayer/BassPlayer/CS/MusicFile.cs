@@ -16,11 +16,16 @@ namespace BassPlayer.CS
         {
             this.filePath = file;
             this.fileName = Vars.GetFileName(file);
-            string[] streamTags = BassMethods.GetStreamTags(file);
-            this.song = streamTags[0];
-            this.artist = streamTags[1];
-            this.album = streamTags[2];
-            this.genre = GetGenre(Convert.ToInt32(streamTags[5]));
+            try
+            {
+                string[] streamTags = BassMethods.GetStreamTags(file);
+                this.song = streamTags[0];
+                this.artist = streamTags[1];
+                this.album = streamTags[2];
+                this.genre = GetGenre(Convert.ToInt32(streamTags[5]));
+            }
+            catch
+            { }
         }
 
         public string GetGenre(int genreID)
