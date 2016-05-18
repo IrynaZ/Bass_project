@@ -82,7 +82,7 @@
             this.label2.Font = new System.Drawing.Font("Tahoma", 7.854546F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label2.Location = new System.Drawing.Point(332, 346);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(51, 13);
+            this.label2.Size = new System.Drawing.Size(60, 16);
             this.label2.TabIndex = 7;
             this.label2.Text = "00:00:00";
             // 
@@ -92,7 +92,7 @@
             this.label3.Font = new System.Drawing.Font("Tahoma", 7.854546F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label3.Location = new System.Drawing.Point(760, 346);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(51, 13);
+            this.label3.Size = new System.Drawing.Size(60, 16);
             this.label3.TabIndex = 8;
             this.label3.Text = "00:00:00";
             // 
@@ -207,6 +207,7 @@
             this.musicFilesListView.TabIndex = 0;
             this.musicFilesListView.UseCompatibleStateImageBehavior = false;
             this.musicFilesListView.View = System.Windows.Forms.View.List;
+            this.musicFilesListView.SelectedIndexChanged += new System.EventHandler(this.musicFilesListView_SelectedIndexChanged);
             this.musicFilesListView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.musicFilesListView_DoubleClick);
             // 
             // imageList2
@@ -222,10 +223,9 @@
             this.labelFilePlaying.Font = new System.Drawing.Font("Tahoma", 7.854546F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.labelFilePlaying.Location = new System.Drawing.Point(17, 360);
             this.labelFilePlaying.Name = "labelFilePlaying";
-            this.labelFilePlaying.Size = new System.Drawing.Size(19, 13);
+            this.labelFilePlaying.Size = new System.Drawing.Size(20, 16);
             this.labelFilePlaying.TabIndex = 10;
             this.labelFilePlaying.Text = "...";
-            
             // 
             // labelView
             // 
@@ -233,7 +233,7 @@
             this.labelView.Font = new System.Drawing.Font("Tahoma", 11.12727F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.labelView.Location = new System.Drawing.Point(639, 49);
             this.labelView.Name = "labelView";
-            this.labelView.Size = new System.Drawing.Size(37, 18);
+            this.labelView.Size = new System.Drawing.Size(46, 21);
             this.labelView.TabIndex = 11;
             this.labelView.Text = "View";
             // 
@@ -246,7 +246,7 @@
             this.editToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(856, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(856, 27);
             this.menuStrip1.TabIndex = 17;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -257,27 +257,27 @@
             this.addFolderToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(41, 23);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // addFileToolStripMenuItem
             // 
             this.addFileToolStripMenuItem.Name = "addFileToolStripMenuItem";
-            this.addFileToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.addFileToolStripMenuItem.Size = new System.Drawing.Size(149, 24);
             this.addFileToolStripMenuItem.Text = "Add File";
             this.addFileToolStripMenuItem.Click += new System.EventHandler(this.addFileToolStripMenuItem_Click);
             // 
             // addFolderToolStripMenuItem
             // 
             this.addFolderToolStripMenuItem.Name = "addFolderToolStripMenuItem";
-            this.addFolderToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.addFolderToolStripMenuItem.Size = new System.Drawing.Size(149, 24);
             this.addFolderToolStripMenuItem.Text = "Add Folder";
             this.addFolderToolStripMenuItem.Click += new System.EventHandler(this.addFolderToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(149, 24);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -286,13 +286,13 @@
             this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.deleteToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(44, 23);
             this.editToolStripMenuItem.Text = "Edit";
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(121, 24);
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
@@ -308,7 +308,7 @@
             // buttonPreviousMusicFile
             // 
             this.buttonPreviousMusicFile.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.buttonPreviousMusicFile.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("buttonPreviousMusicFile.BackgroundImage")));
+            this.buttonPreviousMusicFile.BackgroundImage = global::BassPlayer.Properties.Resources.player_rew_6538;
             this.buttonPreviousMusicFile.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.buttonPreviousMusicFile.Location = new System.Drawing.Point(17, 34);
             this.buttonPreviousMusicFile.Name = "buttonPreviousMusicFile";
@@ -320,7 +320,7 @@
             // buttonNextMusicFile
             // 
             this.buttonNextMusicFile.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.buttonNextMusicFile.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("buttonNextMusicFile.BackgroundImage")));
+            this.buttonNextMusicFile.BackgroundImage = global::BassPlayer.Properties.Resources.player_fwd_2900;
             this.buttonNextMusicFile.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.buttonNextMusicFile.Location = new System.Drawing.Point(179, 35);
             this.buttonNextMusicFile.Name = "buttonNextMusicFile";
@@ -371,7 +371,7 @@
             // Stop_btn
             // 
             this.Stop_btn.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.Stop_btn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Stop_btn.BackgroundImage")));
+            this.Stop_btn.BackgroundImage = global::BassPlayer.Properties.Resources.player_stop_7437;
             this.Stop_btn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Stop_btn.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Stop_btn.Location = new System.Drawing.Point(123, 35);

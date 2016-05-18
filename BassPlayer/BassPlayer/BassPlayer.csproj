@@ -97,6 +97,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bass.dll" />
+    <None Include="Resources\player_fwd_2900.png" />
+    <None Include="Resources\player_fwd_2900_gray.png" />
+    <None Include="Resources\player_rew_6538.png" />
+    <None Include="Resources\player_rew_6538_gray.png" />
+    <None Include="Resources\player_stop_7437_gray.png" />
+    <None Include="Resources\player_stop_7437.png" />
+    <None Include="Resources\player_play_2538_gray.png" />
     <None Include="Resources\player_pause_9601.png" />
     <None Include="Resources\player_play_2538.png" />
   </ItemGroup>

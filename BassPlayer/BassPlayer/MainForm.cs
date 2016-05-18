@@ -14,7 +14,7 @@ namespace MusicLibrary
 {
     public partial class MainForm : Form
     {
-        private int selectedSongIndex = 0;
+        int selectedSongIndex = 0;
         private bool isplaying = false;
         private bool ispaused = false;
         List<MusicFile> musicLibraryFiles{ get; set; }
@@ -35,6 +35,7 @@ namespace MusicLibrary
             }
             AddColumnsToListView(new[] { "File Name", "Song", "Artist", "Album", "Genre" });
             SetDefaultView();
+            CheckButtonsStateAndUpdate();
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -51,6 +52,7 @@ namespace MusicLibrary
         {
             string file = openFileDialog1.FileName;
             AddMusicFile(file);
+            SetDefaultView();
             FileHandling.WriteToFile(Vars.Files, "LibraryContent.txt");
         }
 
@@ -74,20 +76,24 @@ namespace MusicLibrary
                     StartPlaying();
                 }
             }
-            SetPlayOrPauseImage();
+            CheckButtonsStateAndUpdate();
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
             label2.Text = TimeSpan.FromSeconds(BassMethods.GetPosOfStream(BassMethods.Stream)).ToString();
             Time_sl.Value = BassMethods.GetPosOfStream(BassMethods.Stream);
-
+            Vars.CurrentTrackNumber = selectedSongIndex;
             if (BassMethods.ToNextTrack())
             {
-                selectedSongIndex = Vars.CurrentTrackNumber;
+                selectedSongIndex++;
                 label2.Text = TimeSpan.FromSeconds(BassMethods.GetPosOfStream(BassMethods.Stream)).ToString();
                 label3.Text = TimeSpan.FromSeconds(BassMethods.GetTimeOfStream(BassMethods.Stream)).ToString();
                 Time_sl.Maximum = BassMethods.GetTimeOfStream(BassMethods.Stream);
                 Time_sl.Value = BassMethods.GetPosOfStream(BassMethods.Stream);
+                string selectedFileOrSong = musicFilesListView.Items[selectedSongIndex].Text;
+                MusicFile currentMF = musicLibraryFiles.Find(x => (x.fileName == selectedFileOrSong) || (x.song == selectedFileOrSong));
+                labelFilePlaying.Text = currentMF.fileName;
+
             }
             if (BassMethods.EndPlaylist)
             {
@@ -114,7 +120,8 @@ namespace MusicLibrary
             timer1.Enabled = false;
             Time_sl.Value = 0;
             label2.Text = "00:00:00";
-            SetPlayOrPauseImage();
+            SetPlayOrPauseImageAndGrayStop();
+            CheckButtonsStateAndUpdate();
         }
 
         protected void libraryTreeView_AfterSelect(object sender, TreeViewEventArgs e)
@@ -168,6 +175,7 @@ namespace MusicLibrary
                     ListViewItemsSetIcon(1);                 
                     break;
             }
+            CheckButtonsStateAndUpdate();
         }
 
         private void addFileToolStripMenuItem_Click(object sender, EventArgs e)
@@ -187,6 +195,7 @@ namespace MusicLibrary
                 }
             }
             SetDefaultView();
+            CheckButtonsStateAndUpdate();
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -207,6 +216,7 @@ namespace MusicLibrary
                     musicLibraryFiles.Remove(musicItem);
                 }
             }
+            CheckButtonsStateAndUpdate();
         }
 
         private void buttonNextMusicFile_Click(object sender, EventArgs e)
@@ -258,6 +268,11 @@ namespace MusicLibrary
             musicFilesListView.View = View.Details;
             musicFilesListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
             ChangeViewIcons();
+        }
+
+        private void musicFilesListView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CheckButtonsStateAndUpdate();
         }
 
         private void AddMusicFile(string file)
@@ -326,6 +341,7 @@ namespace MusicLibrary
             }
             else
                 StartPlaying();
+            CheckButtonsStateAndUpdate();
         }
 
         private void SetDefaultView()
@@ -368,32 +384,85 @@ namespace MusicLibrary
 
         private void StartPlaying()
         {
-            if ((musicFilesListView.Items.Count != 0) && (musicFilesListView.SelectedIndices != null))
-            {
-                string selection = musicFilesListView.SelectedItems[0].Text;
-             
-                MusicFile currentMF = musicLibraryFiles.Find(x => (x.fileName == selection) || (x.song == selection));
-                labelFilePlaying.Text = currentMF.fileName;
-                BassMethods.Play(currentMF.filePath, BassMethods.Volume);
-                label2.Text = TimeSpan.FromSeconds(BassMethods.GetPosOfStream(BassMethods.Stream)).ToString();
-                label3.Text = TimeSpan.FromSeconds(BassMethods.GetTimeOfStream(BassMethods.Stream)).ToString();
-                Time_sl.Maximum = BassMethods.GetTimeOfStream(BassMethods.Stream);
-                Time_sl.Value = BassMethods.GetPosOfStream(BassMethods.Stream);
-                timer1.Enabled = true;
-                isplaying = true;
-                SetPlayOrPauseImage();
-            }
+            string selection = musicFilesListView.SelectedItems[0].Text;            
+            MusicFile currentMF = musicLibraryFiles.Find(x => (x.fileName == selection) || (x.song == selection));
+            labelFilePlaying.Text = currentMF.fileName;
+            BassMethods.Play(currentMF.filePath, BassMethods.Volume);
+            label2.Text = TimeSpan.FromSeconds(BassMethods.GetPosOfStream(BassMethods.Stream)).ToString();
+            label3.Text = TimeSpan.FromSeconds(BassMethods.GetTimeOfStream(BassMethods.Stream)).ToString();
+            Time_sl.Maximum = BassMethods.GetTimeOfStream(BassMethods.Stream);
+            Time_sl.Value = BassMethods.GetPosOfStream(BassMethods.Stream);
+            timer1.Enabled = true;
+            isplaying = true;
+            SetPlayOrPauseImageAndGrayStop();
         }
 
-        private void SetPlayOrPauseImage()
+        private void SetPlayOrPauseImageAndGrayStop()
         {
             if (isplaying)
             {
                 Play_btn.BackgroundImage = global::BassPlayer.Properties.Resources.player_pause_9601;
+                Stop_btn.Enabled = true;
+                Stop_btn.BackgroundImage = global::BassPlayer.Properties.Resources.player_stop_7437;
             }
             else
             {
                 Play_btn.BackgroundImage = global::BassPlayer.Properties.Resources.player_play_2538;
+                Stop_btn.Enabled = false;
+                Stop_btn.BackgroundImage = global::BassPlayer.Properties.Resources.player_stop_7437_gray;
+            }
+        }
+
+        private void CheckButtonsStateAndUpdate()
+        {
+            if ((musicFilesListView.SelectedItems.Count == 0) && (!isplaying))
+            {
+                Play_btn.Enabled = false;
+                Play_btn.BackgroundImage = global::BassPlayer.Properties.Resources.player_play_2538_gray;
+                Stop_btn.Enabled = false;
+                Stop_btn.BackgroundImage = global::BassPlayer.Properties.Resources.player_stop_7437_gray;
+                buttonPreviousMusicFile.Enabled = false;
+                buttonPreviousMusicFile.BackgroundImage = global::BassPlayer.Properties.Resources.player_rew_6538_gray;
+                buttonNextMusicFile.Enabled = false;
+                buttonNextMusicFile.BackgroundImage = global::BassPlayer.Properties.Resources.player_fwd_2900_gray;
+            }
+            else
+            {
+                if (musicFilesListView.SelectedItems.Count != 0)
+                    selectedSongIndex = musicFilesListView.Items.IndexOf(musicFilesListView.SelectedItems[0]);
+                Play_btn.Enabled = true;
+                SetPlayOrPauseImageAndGrayStop();
+                if ((selectedSongIndex != 0) && (selectedSongIndex != musicFilesListView.Items.Count) && (musicFilesListView.Items.Count > 1))
+                {
+                    buttonPreviousMusicFile.Enabled = true;
+                    buttonPreviousMusicFile.BackgroundImage = global::BassPlayer.Properties.Resources.player_rew_6538;
+                    buttonNextMusicFile.Enabled = true;
+                    buttonNextMusicFile.BackgroundImage = global::BassPlayer.Properties.Resources.player_fwd_2900;
+                }
+                else
+                {
+                    if ((selectedSongIndex == 0) && (musicFilesListView.Items.Count > 1))
+                    {
+                        buttonPreviousMusicFile.Enabled = false;
+                        buttonPreviousMusicFile.BackgroundImage = global::BassPlayer.Properties.Resources.player_rew_6538_gray;
+                        buttonNextMusicFile.Enabled = true;
+                        buttonNextMusicFile.BackgroundImage = global::BassPlayer.Properties.Resources.player_fwd_2900;
+                    }
+                    if ((selectedSongIndex == musicFilesListView.Items.Count) && (musicFilesListView.Items.Count > 1))
+                    {
+                        buttonPreviousMusicFile.Enabled = true;
+                        buttonPreviousMusicFile.BackgroundImage = global::BassPlayer.Properties.Resources.player_rew_6538;
+                        buttonNextMusicFile.Enabled = false;
+                        buttonNextMusicFile.BackgroundImage = global::BassPlayer.Properties.Resources.player_fwd_2900_gray;
+                    }
+                    if (musicFilesListView.Items.Count < 1)
+                    {
+                        buttonPreviousMusicFile.Enabled = false;
+                        buttonPreviousMusicFile.BackgroundImage = global::BassPlayer.Properties.Resources.player_rew_6538_gray;
+                        buttonNextMusicFile.Enabled = false;
+                        buttonNextMusicFile.BackgroundImage = global::BassPlayer.Properties.Resources.player_fwd_2900_gray;
+                    }
+                }
             }
         }
 
