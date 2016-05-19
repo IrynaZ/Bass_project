@@ -95,7 +95,7 @@ namespace MusicLibrary
                 label3.Text = TimeSpan.FromSeconds(BassMethods.GetTimeOfStream(BassMethods.Stream)).ToString();
                 Time_sl.Maximum = BassMethods.GetTimeOfStream(BassMethods.Stream);
                 Time_sl.Value = BassMethods.GetPosOfStream(BassMethods.Stream);
-                labelFilePlaying.Text = folderMusic.GetItem(musicFilesListView.Items[selectedSongIndex].Text).fileName;
+                CutMusicLabel(folderMusic.GetItem(musicFilesListView.Items[selectedSongIndex].Text).fileName);
 
             }
             if (BassMethods.EndPlaylist)
@@ -411,7 +411,7 @@ namespace MusicLibrary
 
         private void StartPlaying()
         {
-            labelFilePlaying.Text = folderMusic.GetItem(musicFilesListView.SelectedItems[0].Text).fileName;
+            CutMusicLabel(folderMusic.GetItem(musicFilesListView.SelectedItems[0].Text).fileName);
             BassMethods.Play(folderMusic.GetItem(musicFilesListView.SelectedItems[0].Text).filePath, BassMethods.Volume);
             label2.Text = TimeSpan.FromSeconds(BassMethods.GetPosOfStream(BassMethods.Stream)).ToString();
             label3.Text = TimeSpan.FromSeconds(BassMethods.GetTimeOfStream(BassMethods.Stream)).ToString();
@@ -500,6 +500,18 @@ namespace MusicLibrary
                     buttonNextMusicFile.Enabled = false;
                     buttonNextMusicFile.BackgroundImage = global::BassPlayer.Properties.Resources.player_fwd_2900_gray;
                 }
+            }
+        }
+
+        private void CutMusicLabel(string file)
+        {
+            if (file.Length > 50)
+            {
+                labelFilePlaying.Text = file.Substring(0, 50) + "...";
+            }
+            else
+            {
+                labelFilePlaying.Text = file;
             }
         }
     }
