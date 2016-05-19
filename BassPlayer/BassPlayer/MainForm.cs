@@ -17,22 +17,25 @@ namespace MusicLibrary
         int selectedSongIndex = 0;
         private bool isplaying = false;
         private bool ispaused = false;
-        List<MusicFile> musicLibraryFiles{ get; set; }
+        MusicFolder folderMusic = new MusicFolder("Music", "Music");
+        MusicFolder folderSongs = new MusicFolder("Songs", "Songs");
+        MusicFolder folderArtists = new MusicFolder("Artists", "Artists");
+        MusicFolder folderAlbums = new MusicFolder("Albums", "Albums");
+        MusicFolder folderGenres = new MusicFolder("Genres", "Genres");
+        MusicFolder lastExpandedFolder = new MusicFolder("", "");
+        string lastSubfolder = null;
 
         public MainForm()
         {
             InitializeComponent();
             libraryTreeView.ExpandAll();
-            musicLibraryFiles = new List<MusicFile>();
             List<string> files = new List<string>(); 
             if (!FileHandling.MissingFileCreation("LibraryContent.txt"))
             {
-                FileHandling.ReadFromFile("LibraryContent.txt", out files);
-                foreach (string file in files)
-                {
-                    AddMusicFile(file);
-                }
+                folderMusic.ReadFolderFromFile("LibraryContent.txt");
             }
+            folderMusic.AddFolderToListView(musicFilesListView);
+            UpdateFolders(folderMusic);
             AddColumnsToListView(new[] { "File Name", "Song", "Artist", "Album", "Genre" });
             SetDefaultView();
             CheckButtonsStateAndUpdate();
@@ -51,7 +54,9 @@ namespace MusicLibrary
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
             string file = openFileDialog1.FileName;
-            AddMusicFile(file);
+            folderMusic.AddItemFromFile(file);
+            UpdateFolders(folderMusic);
+            folderMusic.AddFolderToListView(musicFilesListView);
             SetDefaultView();
             FileHandling.WriteToFile(Vars.Files, "LibraryContent.txt");
         }
@@ -90,9 +95,7 @@ namespace MusicLibrary
                 label3.Text = TimeSpan.FromSeconds(BassMethods.GetTimeOfStream(BassMethods.Stream)).ToString();
                 Time_sl.Maximum = BassMethods.GetTimeOfStream(BassMethods.Stream);
                 Time_sl.Value = BassMethods.GetPosOfStream(BassMethods.Stream);
-                string selectedFileOrSong = musicFilesListView.Items[selectedSongIndex].Text;
-                MusicFile currentMF = musicLibraryFiles.Find(x => (x.fileName == selectedFileOrSong) || (x.song == selectedFileOrSong));
-                labelFilePlaying.Text = currentMF.fileName;
+                labelFilePlaying.Text = folderMusic.GetItem(musicFilesListView.Items[selectedSongIndex].Text).fileName;
 
             }
             if (BassMethods.EndPlaylist)
@@ -124,6 +127,18 @@ namespace MusicLibrary
             CheckButtonsStateAndUpdate();
         }
 
+        private void UpdateFolders(MusicFolder sourceToUpdate)
+        {
+            folderMusic.SyncFolderItems(sourceToUpdate.folderItems);
+            folderSongs.SyncFolderItems(sourceToUpdate.folderItems);
+            folderArtists.SyncFolderItems(sourceToUpdate.folderItems);
+            folderArtists.FillSubFolders();
+            folderAlbums.SyncFolderItems(sourceToUpdate.folderItems);
+            folderAlbums.FillSubFolders();
+            folderGenres.SyncFolderItems(sourceToUpdate.folderItems);
+            folderGenres.FillSubFolders();
+        }
+
         protected void libraryTreeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
             musicFilesListView.View = View.List;
@@ -131,50 +146,30 @@ namespace MusicLibrary
             switch (e.Node.Text)
             {
                 case "Music":
-                    foreach (MusicFile musicItem in musicLibraryFiles)
-                    {
-                        musicFilesListView.Items.Add(new ListViewItem(new[] { musicItem.fileName, musicItem.song, musicItem.artist, musicItem.album, musicItem.genre }));
-                    }
+                    folderMusic.AddFolderToListView(musicFilesListView);
                     AddColumnsToListView(new[] { "File Name", "Song", "Artist", "Album", "Genre" });
                     ListViewItemsSetIcon(2);
                     break;
                 case "Songs":
-                    foreach (MusicFile musicItem in musicLibraryFiles)
-                    {
-                        if (musicItem.song != null)
-                            musicFilesListView.Items.Add(new ListViewItem(new[] { musicItem.song, musicItem.fileName, musicItem.artist, musicItem.album, musicItem.genre }));
-                    }
+                    folderSongs.SyncFolderItems(folderMusic.folderItems);
+                    folderSongs.AddFolderToListView(musicFilesListView);
                     AddColumnsToListView(new[] { "Song", "File Name", "Artist", "Album", "Genre" });
                     ListViewItemsSetIcon(2);
                     break;
-                case "Artists":
-                case "Albums":
-                case "Genres":
-                    List<string> items = new List<string>();
-                    List<string> itemsNoDuplicates = new List<string>();
-                    foreach (MusicFile musicItem in musicLibraryFiles)
-                    {
-                        switch (e.Node.Text)
-                        {
-                            case "Artists":
-                                items.Add(musicItem.artist);
-                                break;
-                            case "Albums":
-                                items.Add(musicItem.album);
-                                break;
-                            case "Genres":
-                                items.Add(musicItem.genre);
-                                break;
-                        }
-                    }
-                    itemsNoDuplicates = items.Distinct().ToList<string>();
-                    foreach (string item in itemsNoDuplicates)
-                    {
-                        if (item != null)
-                            musicFilesListView.Items.Add(new ListViewItem(new[] { item }));
-                    }
+                case "Artists":                    
+                    folderArtists.AddFolderToListView(musicFilesListView);
                     AddColumnsToListView(new[] { e.Node.Text.ToString() });
-                    ListViewItemsSetIcon(1);                 
+                    ListViewItemsSetIcon(1);
+                    break;
+                case "Albums":
+                    folderAlbums.AddFolderToListView(musicFilesListView);
+                    AddColumnsToListView(new[] { e.Node.Text.ToString() });
+                    ListViewItemsSetIcon(1);
+                    break;
+                case "Genres":
+                    folderGenres.AddFolderToListView(musicFilesListView);
+                    AddColumnsToListView(new[] { e.Node.Text.ToString() });
+                    ListViewItemsSetIcon(1);
                     break;
             }
             CheckButtonsStateAndUpdate();
@@ -193,8 +188,10 @@ namespace MusicLibrary
                 folderPath = openFolderDialog1.SelectedPath;
                 foreach (string file in Directory.GetFiles(folderPath))
                 {
-                    AddMusicFile(file);
+                    folderMusic.AddItemFromFile(file);
                 }
+                UpdateFolders(folderMusic);
+                folderMusic.AddFolderToListView(musicFilesListView);
             }
             SetDefaultView();
             CheckButtonsStateAndUpdate();
@@ -207,15 +204,53 @@ namespace MusicLibrary
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if ((musicFilesListView.Items.Count != 0) && (musicFilesListView.SelectedIndices != null))
+            if ((musicFilesListView.Items.Count != 0) && (musicFilesListView.SelectedItems.Count != 0))
             {
                 foreach (ListViewItem item in musicFilesListView.SelectedItems)
                 {
                     string selection = item.Text;
-                    MusicFile musicItem = musicLibraryFiles.Find(x => (x.fileName == selection) || (x.song == selection));
-                    item.Remove();
-                    Vars.Files.Remove(musicItem.filePath);
-                    musicLibraryFiles.Remove(musicItem);
+                    if (libraryTreeView.SelectedNode != null)
+                    {
+                        switch (libraryTreeView.SelectedNode.Text)
+                        {
+                            case "Music":
+                            case "Songs":
+                                folderMusic.RemoveItem(folderMusic.GetItem(selection));
+                                UpdateFolders(folderMusic);
+                                folderMusic.AddFolderToListView(musicFilesListView);
+                                ListViewItemsSetIcon(2);
+                                break;
+                            case "Artists":
+                                folderArtists.RemoveSubFolder(selection);
+                                UpdateFolders(folderArtists);
+                                folderArtists.AddFolderToListView(musicFilesListView);
+                                ListViewItemsSetIcon(1);
+                                break;
+                            case "Albums":
+                                folderAlbums.RemoveSubFolder(selection);
+                                UpdateFolders(folderAlbums);
+                                folderAlbums.AddFolderToListView(musicFilesListView);
+                                ListViewItemsSetIcon(1);
+                                break;
+                            case "Genres":
+                                folderGenres.RemoveSubFolder(selection);
+                                UpdateFolders(folderGenres);
+                                folderGenres.AddFolderToListView(musicFilesListView);
+                                ListViewItemsSetIcon(1);
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        lastExpandedFolder.RemoveItemInSubfolder(lastSubfolder, lastExpandedFolder.GetItem(selection));
+                        lastExpandedFolder.RemoveItem(lastExpandedFolder.GetItem(selection));
+                        UpdateFolders(lastExpandedFolder);
+                        lastExpandedFolder.ExpandSubFolderInListView(lastSubfolder, musicFilesListView);
+                        if (lastExpandedFolder.GetSubFolder(lastSubfolder) == null)
+                            ListViewItemsSetIcon(1);
+                        else
+                            ListViewItemsSetIcon(2);
+                    }
                 }
             }
             CheckButtonsStateAndUpdate();
@@ -277,17 +312,6 @@ namespace MusicLibrary
             CheckButtonsStateAndUpdate();
         }
 
-        private void AddMusicFile(string file)
-        {
-            if (!Vars.FileAlreadyExistsInFiles(file) && Vars.FileIsMP3(file))
-            {
-                Vars.Files.Add(file);
-                MusicFile musicItem = new MusicFile(file);
-                musicFilesListView.Items.Add(new ListViewItem(new[] {musicItem.fileName, musicItem.song, musicItem.artist, musicItem.album, musicItem.genre }));
-                musicLibraryFiles.Add(musicItem);
-            }
-        }
-
         private void ListViewItemsSetIcon(int iconID)
         {
             foreach (ListViewItem itemRow in musicFilesListView.Items)
@@ -308,7 +332,8 @@ namespace MusicLibrary
         private void musicFilesListView_DoubleClick(object sender, MouseEventArgs e)
         {
             if (libraryTreeView.SelectedNode != null)
-            { 
+            {
+                string item = musicFilesListView.SelectedItems[0].Text;
                 switch (libraryTreeView.SelectedNode.Text)
                 {
                     case "Music":
@@ -316,26 +341,26 @@ namespace MusicLibrary
                         StartPlaying();
                         break;
                     case "Artists":
-                    case "Albums":
-                    case "Genres":
-                        string item = musicFilesListView.SelectedItems[0].Text;
-                        musicFilesListView.Clear();
-                        switch (libraryTreeView.SelectedNode.Text)
-                        {
-                            case "Artists":
-                                foreach (MusicFile musicItem in musicLibraryFiles.FindAll(x => x.artist == item))
-                                    musicFilesListView.Items.Add(new ListViewItem(new[] { musicItem.fileName, musicItem.song, musicItem.artist, musicItem.album, musicItem.genre }));                               
-                                break;
-                            case "Albums":
-                                foreach (MusicFile musicItem in musicLibraryFiles.FindAll(x => x.album == item))
-                                    musicFilesListView.Items.Add(new ListViewItem(new[] { musicItem.fileName, musicItem.song, musicItem.artist, musicItem.album, musicItem.genre }));
-                                break;
-                            case "Genres":
-                                foreach (MusicFile musicItem in musicLibraryFiles.FindAll(x => x.genre == item))
-                                    musicFilesListView.Items.Add(new ListViewItem(new[] { musicItem.fileName, musicItem.song, musicItem.artist, musicItem.album, musicItem.genre }));
-                                break;
-                        }                       
+                        lastSubfolder = folderArtists.GetSubFolder(musicFilesListView.SelectedItems[0].Text).folderName;
+                        folderArtists.ExpandSubFolderInListView(musicFilesListView.SelectedItems[0].Text, musicFilesListView);
                         AddColumnsToListView(new[] { "File Name", "Song", "Artist", "Album", "Genre" });
+                        lastExpandedFolder = folderArtists;
+                        libraryTreeView.SelectedNode = null;                       
+                        ChangeViewIcons();
+                        break;
+                    case "Albums":
+                        lastSubfolder = folderAlbums.GetSubFolder(musicFilesListView.SelectedItems[0].Text).folderName;
+                        folderAlbums.ExpandSubFolderInListView(musicFilesListView.SelectedItems[0].Text, musicFilesListView);
+                        AddColumnsToListView(new[] { "File Name", "Song", "Artist", "Album", "Genre" });
+                        lastExpandedFolder = folderAlbums;
+                        libraryTreeView.SelectedNode = null;
+                        ChangeViewIcons();
+                        break;
+                    case "Genres":
+                        lastSubfolder = folderGenres.GetSubFolder(musicFilesListView.SelectedItems[0].Text).folderName;
+                        folderGenres.ExpandSubFolderInListView(musicFilesListView.SelectedItems[0].Text, musicFilesListView);
+                        AddColumnsToListView(new[] { "File Name", "Song", "Artist", "Album", "Genre" });
+                        lastExpandedFolder = folderGenres;
                         libraryTreeView.SelectedNode = null;
                         ChangeViewIcons();
                         break;
@@ -386,10 +411,8 @@ namespace MusicLibrary
 
         private void StartPlaying()
         {
-            string selection = musicFilesListView.SelectedItems[0].Text;            
-            MusicFile currentMF = musicLibraryFiles.Find(x => (x.fileName == selection) || (x.song == selection));
-            labelFilePlaying.Text = currentMF.fileName;
-            BassMethods.Play(currentMF.filePath, BassMethods.Volume);
+            labelFilePlaying.Text = folderMusic.GetItem(musicFilesListView.SelectedItems[0].Text).fileName;
+            BassMethods.Play(folderMusic.GetItem(musicFilesListView.SelectedItems[0].Text).filePath, BassMethods.Volume);
             label2.Text = TimeSpan.FromSeconds(BassMethods.GetPosOfStream(BassMethods.Stream)).ToString();
             label3.Text = TimeSpan.FromSeconds(BassMethods.GetTimeOfStream(BassMethods.Stream)).ToString();
             Time_sl.Maximum = BassMethods.GetTimeOfStream(BassMethods.Stream);
@@ -434,7 +457,7 @@ namespace MusicLibrary
                     selectedSongIndex = musicFilesListView.Items.IndexOf(musicFilesListView.SelectedItems[0]);
                 Play_btn.Enabled = true;
                 SetPlayOrPauseImageAndGrayStop();
-                if ((selectedSongIndex != 0) && (selectedSongIndex != musicFilesListView.Items.Count) && (musicFilesListView.Items.Count > 1))
+                if ((selectedSongIndex != 0) && (selectedSongIndex != musicFilesListView.Items.Count - 1) && (musicFilesListView.Items.Count > 1))
                 {
                     buttonPreviousMusicFile.Enabled = true;
                     buttonPreviousMusicFile.BackgroundImage = global::BassPlayer.Properties.Resources.player_rew_6538;
@@ -450,7 +473,7 @@ namespace MusicLibrary
                         buttonNextMusicFile.Enabled = true;
                         buttonNextMusicFile.BackgroundImage = global::BassPlayer.Properties.Resources.player_fwd_2900;
                     }
-                    if ((selectedSongIndex == musicFilesListView.Items.Count) && (musicFilesListView.Items.Count > 1))
+                    if ((selectedSongIndex == musicFilesListView.Items.Count - 1) && (musicFilesListView.Items.Count > 1))
                     {
                         buttonPreviousMusicFile.Enabled = true;
                         buttonPreviousMusicFile.BackgroundImage = global::BassPlayer.Properties.Resources.player_rew_6538;
@@ -466,8 +489,18 @@ namespace MusicLibrary
                     }
                 }
             }
+            if (libraryTreeView.SelectedNode != null)
+            {
+                if ((libraryTreeView.SelectedNode.Text == "Artists") || (libraryTreeView.SelectedNode.Text == "Albums") || (libraryTreeView.SelectedNode.Text == "Genres"))
+                {
+                    Play_btn.Enabled = false;
+                    Play_btn.BackgroundImage = global::BassPlayer.Properties.Resources.player_play_2538_gray;
+                    buttonPreviousMusicFile.Enabled = false;
+                    buttonPreviousMusicFile.BackgroundImage = global::BassPlayer.Properties.Resources.player_rew_6538_gray;
+                    buttonNextMusicFile.Enabled = false;
+                    buttonNextMusicFile.BackgroundImage = global::BassPlayer.Properties.Resources.player_fwd_2900_gray;
+                }
+            }
         }
-
-     
     }
 }
