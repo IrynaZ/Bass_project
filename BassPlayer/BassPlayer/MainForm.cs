@@ -63,26 +63,21 @@ namespace MusicLibrary
 
         private void Play_btn_Click(object sender, EventArgs e)
         {
-            if (ispaused)
+            if (isplaying)
             {
-                BassMethods.Resume();
-                ispaused = false;
-                isplaying = true;
+                ispaused = BassMethods.Pause();
+                isplaying = false;
+
             }
             else
             {
-                if (isplaying)
-                {
-                    ispaused = BassMethods.Pause();
-                    isplaying = false;
-                }
-                else
-                {
-                    StartPlaying();
-                }
+                isplaying = true;
+                ispaused = false;
+                StartPlaying();
             }
             CheckButtonsStateAndUpdate();
         }
+
         private void timer1_Tick(object sender, EventArgs e)
         {
             label2.Text = TimeSpan.FromSeconds(BassMethods.GetPosOfStream(BassMethods.Stream)).ToString();
@@ -123,7 +118,7 @@ namespace MusicLibrary
             timer1.Enabled = false;
             Time_sl.Value = 0;
             label2.Text = "00:00:00";
-            SetPlayOrPauseImageAndGrayStop();
+            ispaused = false;
             CheckButtonsStateAndUpdate();
         }
 
@@ -419,6 +414,7 @@ namespace MusicLibrary
             Time_sl.Value = BassMethods.GetPosOfStream(BassMethods.Stream);
             timer1.Enabled = true;
             isplaying = true;
+            ispaused = false;
             SetPlayOrPauseImageAndGrayStop();
         }
 
@@ -432,9 +428,18 @@ namespace MusicLibrary
             }
             else
             {
-                Play_btn.BackgroundImage = global::BassPlayer.Properties.Resources.player_play_2538;
-                Stop_btn.Enabled = false;
-                Stop_btn.BackgroundImage = global::BassPlayer.Properties.Resources.player_stop_7437_gray;
+                if (ispaused)
+                {
+                    Play_btn.BackgroundImage = global::BassPlayer.Properties.Resources.player_play_2538;
+                    Stop_btn.Enabled = true;
+                    Stop_btn.BackgroundImage = global::BassPlayer.Properties.Resources.player_stop_7437;
+                }
+                else
+                {
+                    Play_btn.BackgroundImage = global::BassPlayer.Properties.Resources.player_play_2538;
+                    Stop_btn.Enabled = false;
+                    Stop_btn.BackgroundImage = global::BassPlayer.Properties.Resources.player_stop_7437_gray;
+                }
             }
         }
 
@@ -493,6 +498,8 @@ namespace MusicLibrary
             {
                 if ((libraryTreeView.SelectedNode.Text == "Artists") || (libraryTreeView.SelectedNode.Text == "Albums") || (libraryTreeView.SelectedNode.Text == "Genres"))
                 {
+                    Stop_btn.Enabled = false;
+                    Stop_btn.BackgroundImage = global::BassPlayer.Properties.Resources.player_stop_7437_gray;
                     Play_btn.Enabled = false;
                     Play_btn.BackgroundImage = global::BassPlayer.Properties.Resources.player_play_2538_gray;
                     buttonPreviousMusicFile.Enabled = false;
